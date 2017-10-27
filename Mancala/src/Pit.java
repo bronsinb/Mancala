@@ -7,4 +7,6 @@ import java.awt.Graphics2D;
  */
 public interface Pit {
 	void draw(Graphics2D g);
+	void addStone(Stone s);
+	void clear();
 }
