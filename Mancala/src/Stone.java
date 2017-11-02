@@ -13,6 +13,6 @@ public class Stone {
 	}
 	
 	public void draw(Graphics2D g) {
-		g.draw(stone);
+		g.fill(stone);
 	}
 }

@@ -15,7 +15,7 @@ public class GamePit implements Pit{
 		stones = new ArrayList<>();
 		this.s = s;
 		for(int i = 0; i < stoneAmount; i++) {
-			stones.add(new Stone(i * 2, 0, 3));
+			stones.add(new Stone((s.getBounds2D().getX()) + (s.getBounds2D().getWidth()/2), i * 6 + (s.getBounds2D().getY()) + 10, 5));
 		}
 	}
 	

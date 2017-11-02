@@ -10,12 +10,9 @@ public class PlayerPit implements Pit{
 	private ArrayList<Stone> stones;
 	private RectangularShape s;
 	
-	public PlayerPit(int stoneAmount, RectangularShape s) {
+	public PlayerPit(RectangularShape s) {
 		stones = new ArrayList<>();
 		this.s = s;
-		for(int i = 0; i < stoneAmount; i++) {
-			stones.add(new Stone(i * 2, 0, 3));
-		}
 	}
 	
 	@Override
