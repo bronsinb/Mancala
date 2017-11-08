@@ -1,40 +1,42 @@
-import java.awt.Graphics2D;
-import java.awt.Shape;
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+
+import javax.swing.*;
 
 /**
  * Class that draws Game pits
  * @author Bronsin Benyamin Pouran
  *
  */
-public class GamePit implements Pit{
+public class GamePit extends JComponent{
 	private ArrayList<Stone> stones;
-	private Shape s;
+	private Rectangle2D.Double s;
 
-	public GamePit(int stoneAmount, Shape s) {
+	public GamePit(int stoneAmount, String player) {
 		stones = new ArrayList<>();
-		this.s = s;
+		s = new Rectangle2D.Double(0, 0, 100, 100);
+		this.setLayout(new GridLayout(3,3));
 		for(int i = 0; i < stoneAmount; i++) {
-			stones.add(new Stone((s.getBounds2D().getX()) + (s.getBounds2D().getWidth()/2), i * 6 + (s.getBounds2D().getY()) + 10, 5));
+			stones.add(new Stone(10));
 		}
 	}
 	
 	@Override
-	public void draw(Graphics2D g) {
-		// TODO Auto-generated method stub
-		g.draw(s);
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D) g;
+		g2.draw(s);
 		for(Stone s: stones) {
-			s.draw(g);
+			this.add(s);
 		}
 	}
 
-	@Override
 	public void addStone(Stone s) {
 		// TODO Auto-generated method stub
 		stones.add(s);
 	}
 
-	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
 		stones.clear();

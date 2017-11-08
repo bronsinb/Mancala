@@ -5,8 +5,7 @@ import java.awt.Graphics2D;
  * @author Bronsin Benyamin
  *
  */
-public interface Pit {
-	void draw(Graphics2D g);
+public interface Pit{
 	void addStone(Stone s);
 	void clear();
 }
