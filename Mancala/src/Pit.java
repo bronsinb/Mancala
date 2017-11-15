@@ -6,6 +6,6 @@ import java.awt.Graphics2D;
  *
  */
 public interface Pit{
-	void addStone(Stone s);
+	void addStone(int s);
 	void clear();
 }

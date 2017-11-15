@@ -11,7 +11,7 @@ public class Stone extends JComponent{
 	private Ellipse2D stone;
 	
 	public Stone(double size) {
-		stone = new Ellipse2D.Double(3, 3, size, size);
+		stone = new Ellipse2D.Double(0, 0, size, size);
 	}
 	
 	@Override
