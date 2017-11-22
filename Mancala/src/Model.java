@@ -8,6 +8,8 @@ import javax.swing.event.ChangeListener;
 
 public class Model {
 	private boolean playerATurn;
+	private boolean freeTurn;
+	
 	private ArrayList<ModelPit> pList;
 	private ArrayList<ModelPit> savedPList;
 	private ModelPit aPitGoal;
@@ -36,6 +38,7 @@ public class Model {
 		bPitGoal = new ModelPit(0);
 		listeners = new ArrayList<ChangeListener> ();
 		playerATurn = true;
+		freeTurn = false;
 		event = new ChangeEvent(this); // this refers to this Model object...
 	}
 	
@@ -81,7 +84,7 @@ public class Model {
 			System.out.println("Correct Pit Selected");
 		}
 		else {
-			System.out.println("Wrong Pit Selected. Please try again.");
+			System.out.println("Wrong Pit Selected. Please choose your own Pit.");
 		}
 	}
 	
@@ -98,7 +101,7 @@ public class Model {
 	 * This function changes the current player's turn to the other player's turn.
 	 *
 	 */
-	public void setPlayerAsTurn() {
+	public void changePlayerTurns() {
 		playerATurn = !playerATurn;
 	}
 	
@@ -113,6 +116,9 @@ public class Model {
 		
 		while (stonesInHand != 0) {
 			currentPos++; //move to next pit
+			if (pList.get(currentPos).isEmpty(){
+				
+			}
 			if (currentPos != 6) { //if current position is not the player B's position...
 				pList.get(currentPos).addStone(1); //add 1 stone to that pit
 				stonesInHand--; //now we have 1 less stone in our hand
@@ -121,7 +127,7 @@ public class Model {
 				aPitGoal.addStone(1); //if current pos is in player B's pit then first... add stone to player A's goal
 				stonesInHand--;
 				
-				if (stonesInHand == 0 ) { //if the number of stones left in hand is 0 and we just added to a goal.. free turn
+				if (stonesInHand == 0 ) { //if the number of stones left in hand is 0 and we just added to a goal.. free turn for A
 					//Do Free Turn here.
 					break; //Exit while loop
 				}
@@ -130,12 +136,20 @@ public class Model {
 					stonesInHand--;
 				}
 			}
+			//Check if we should capture or not...
 			
+			
+			
+			//Check for win condition
 			if (winConditionMet()) {
-				
+				//Function for  GAME OVER!!! GG
 			}
-			else {
-				playerATurn = false;
+			
+			//Check if player still has free turn
+			if (freeTurn) {
+				//don't change PlayerTurns
+			} else {
+				changePlayerTurns(); //change PlayerTurns
 			}
 		}
 	}
@@ -147,7 +161,44 @@ public class Model {
 	 */
 	
 	public void moveStonesPlayerB(int pitPos) {
+		int currentPos = pitPos;
+		int stonesInHand = pList.get(pitPos).emptyPit();
 		
+		while (stonesInHand != 0) {
+			currentPos++; //move to next pit
+			if (currentPos != 12) { //if current pit position is not out of index
+				pList.get(currentPos).addStone(1); //add 1 stone to that pit
+				stonesInHand--; //now we have 1 less stone in our hand
+			}
+			else { // case: pit position is out of index
+				bPitGoal.addStone(1); //if current pos is in player B's pit then first... add stone to player B's goal
+				stonesInHand--;
+				if (stonesInHand == 0 ) { //if the number of stones left in hand is 0 and we just added to a goal.. free turn for B
+					freeTurn = true;
+					break; //Exit while loop
+				}
+				else { // else continue on adding stones to pit until stones in hand is empty
+					currentPos = 0; // resets current position because we advanced past playerB's goal...
+					pList.get(currentPos).addStone(1);
+					stonesInHand--;
+				}
+			}
+			//Check if we should capture or not...
+			
+			
+			
+			//Check for win condition
+			if (winConditionMet()) {
+				//Function for  GAME OVER!!! GG
+			}
+			
+			//Check if player still has free turn
+			if (freeTurn) {
+				//don't change PlayerTurns
+			} else {
+				changePlayerTurns();
+			}
+		}
 	}
 	
 	/**
@@ -155,7 +206,6 @@ public class Model {
 	 * 
 	 * @return ???
 	 */
-	
 	public boolean winConditionMet () {
 		return false;
 	}

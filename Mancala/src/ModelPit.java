@@ -40,5 +40,13 @@ public class ModelPit {
 		stones = 0;
 		return temp;	
 	}
-	
+
+	public boolean isEmpty() {
+		if (stones == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
