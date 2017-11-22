@@ -75,6 +75,7 @@ public class Model {
 		saveState();
 		if (playerAsTurn() && pitPos <= 5) {
 			System.out.println("Correct Pit Selected");
+			moveStonesPlayerA(pitPos);
 		}
 		else if (!playerAsTurn() && pitPos > 5) {
 			System.out.println("Correct Pit Selected");
@@ -94,11 +95,69 @@ public class Model {
 	}
 	
 	/**
-	 * Gets number of stones in current pit and empties it
+	 * This function changes the current player's turn to the other player's turn.
+	 *
 	 */
-	public void moveStones(int pitPos) {
+	public void setPlayerAsTurn() {
+		playerATurn = !playerATurn;
+	}
+	
+	/**
+	 * Gets number of stones in current pit and empties it.
+	 * 
+	 * Move stones according to player A's POV.
+	 */
+	public void moveStonesPlayerA(int pitPos) {
+		int currentPos = pitPos;
 		int stonesInHand = pList.get(pitPos).emptyPit();
 		
+		while (stonesInHand != 0) {
+			currentPos++; //move to next pit
+			if (currentPos != 6) { //if current position is not the player B's position...
+				pList.get(currentPos).addStone(1); //add 1 stone to that pit
+				stonesInHand--; //now we have 1 less stone in our hand
+			}
+			else {
+				aPitGoal.addStone(1); //if current pos is in player B's pit then first... add stone to player A's goal
+				stonesInHand--;
+				
+				if (stonesInHand == 0 ) { //if the number of stones left in hand is 0 and we just added to a goal.. free turn
+					//Do Free Turn here.
+					break; //Exit while loop
+				}
+				else { // else continue on adding stones to pit until stones in hand is empty
+					pList.get(currentPos).addStone(1);
+					stonesInHand--;
+				}
+			}
+			
+			if (winConditionMet()) {
+				
+			}
+			else {
+				playerATurn = false;
+			}
+		}
+	}
+	
+	/**
+	 * Gets number of stones in current pit and empties it.
+	 * 
+	 * Move stones according to player B's POV.
+	 */
+	
+	public void moveStonesPlayerB(int pitPos) {
+		
+	}
+	
+	/**
+	 * Checks if a win condition has been met yet
+	 * 
+	 * @return ???
+	 */
+	
+	public boolean winConditionMet () {
+		return false;
 	}
 
 }
