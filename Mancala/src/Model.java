@@ -1,3 +1,6 @@
+/**
+ * Tai Dao - 11/21/2017 4:00 PM - 5:45 PM
+ */
 import java.util.ArrayList;
 
 import javax.swing.event.ChangeEvent;
@@ -25,9 +28,9 @@ public class Model {
 	Model(int startingStones) {
 		pList = new ArrayList<ModelPit> ();
 		savedPList = new ArrayList<ModelPit> ();
-		
-		for (ModelPit p : pList) {
-			p.addStone(startingStones);
+		for (int i = 0; i <= 11; i ++) {
+			pList.add(new ModelPit(startingStones)); //Each Pit will be initialized with 3 or 4 stones and
+			//added to an arrayList of Pits
 		}
 		aPitGoal = new ModelPit(0);
 		bPitGoal = new ModelPit(0);
@@ -51,21 +54,51 @@ public class Model {
 		updateViews();
 	}
 
-	/**
-	 * pitPos is retrieved from a pit listener. when a pit is pressed it calls this function with it's position as the parameter
-	 * 
-	 * @param pitPos
-	 */
-	public void play (int pitPos) {
-		saveState();
-		
-		
-	}
 	
+	/**
+	 * When called updates all views based on the data structure ArrayList<ModelPit> pList
+	 */
 	public void updateViews() {
 		for (ChangeListener cL : listeners) { //notify all listeners that the state has changed.
 			cL.stateChanged(event); //model object is passed to the stateChanged functions.
 		}
+	}
+	
+	/**
+	 * pitPos is retrieved from a pit listener. when a pit is pressed it calls this function with it's position as the parameter
+	 * 
+	 * This function checks if the selected pit is valid for the current player's turn.
+	 * 
+	 * @param pitPos
+	 */
+	public void checkCorrectPitSelected (int pitPos) {
+		saveState();
+		if (playerAsTurn() && pitPos <= 5) {
+			System.out.println("Correct Pit Selected");
+		}
+		else if (!playerAsTurn() && pitPos > 5) {
+			System.out.println("Correct Pit Selected");
+		}
+		else {
+			System.out.println("Wrong Pit Selected. Please try again.");
+		}
+	}
+	
+	/**
+	 * This function returns true if it is player A's turn. It returns false if it isn't player A's turn.
+	 * 
+	 * @return playerATurn
+	 */
+	public boolean playerAsTurn() {
+		return playerATurn;
+	}
+	
+	/**
+	 * Gets number of stones in current pit and empties it
+	 */
+	public void moveStones(int pitPos) {
+		int stonesInHand = pList.get(pitPos).emptyPit();
+		
 	}
 
 }
