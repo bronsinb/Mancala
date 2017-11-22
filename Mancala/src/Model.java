@@ -114,9 +114,9 @@ public class Model {
 		int currentPos = pitPos;
 		int stonesInHand = pList.get(pitPos).emptyPit();
 		
-		while (stonesInHand != 0) {
+		while (stonesInHand != 1) {
 			currentPos++; //move to next pit
-			if (pList.get(currentPos).isEmpty(){
+			if (pList.get(currentPos).isEmpty()){ //if the current selected pit is empty place the last pebble here and capture!
 				
 			}
 			if (currentPos != 6) { //if current position is not the player B's position...
