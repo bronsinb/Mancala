@@ -148,7 +148,7 @@ public class Model {
 			else { // else continue on and don't capture
 		
 				currentPos++; //move to next pit
-				if (currentPos != 6) { //if current position is not past player A's goal aka not positiot 6 (b/c pos 6 is player B's pit)
+				if (currentPos > 6 && currentPos != 11 || currentPos < 6) { //if current position is not near a goal
 					pList.get(currentPos).addStone(1); // continue adding 1 stone to that pit
 					stonesInHand--; //now we have 1 less stone in our hand
 				}
@@ -157,14 +157,14 @@ public class Model {
 					pList.get(currentPos).addStone(1);
 					stonesInHand--;
 				}
-				else { // Case: We have advanced pass Player A's Side...
+				else { // AKA Case (currentPos == 6)... We have advanced pass Player A's Side...
 					
 					aPitGoal.addStone(1); //since we have advanced pass we should put a stone in Player A's goal
 					stonesInHand--;
-			
+					
 					if (stonesInHand == 0 ) { //if the number of stones left in hand is 0 and we just added to A's goal.. free turn for A
 						//TODO Perform Free Turn Method Here.
-							// Still Player A's Turn.... so exit this while loop
+							changePlayerTurns(); // gets negated at the exit of the while loop therefore still player A's turn
 						break;
 					}
 					else { // else continue on adding stones to pits until stones in hand is empty
@@ -173,17 +173,16 @@ public class Model {
 					}
 				}
 				
-
-				// Check if the game has ended. If it hasn't change turns.
-				if (endGameConditionMet()) {
-					System.out.println("Game Over. Player X has won!");
-					//TODO function to count stones in each goal to determine who won.
-					
-				}
-				else {
-					changePlayerTurns();
-				}
 			}
+		} // end of while loop. stones in hand is now empty
+		
+		// Check if the game has ended. If it hasn't change turns.
+		if (endGameConditionMet()) {
+			System.out.println("Game Over. Player X has won!");
+			//TODO function to count stones in each goal to determine who won.
+		}
+		else {
+			changePlayerTurns();
 		}
 	}
 	
@@ -195,10 +194,54 @@ public class Model {
 	
 	public void moveStonesPlayerB(int pitPos) {
 		int currentPos = pitPos;
-		int stonesInHand = pList.get(pitPos).emptyPit();
+		int stonesInHand = pList.get(currentPos).emptyPit(); //Pick up stones in hand... So pit is empty...
 		
-		while (stonesInHand != 0) {
-	
+		while (stonesInHand != 0) { // While we still have stones in our hand...
+			int nextPosAfterCurrent = currentPos++;
+			
+			// Capture Condition... LAST STONE... Next pit is still on your side.... AND IT's EMPTY
+			if (stonesInHand == 1 && nextPosAfterCurrent >= 6 && nextPosAfterCurrent <= 11 && pList.get(currentPos).isEmpty()) { 
+					// TODO perform capture method here....
+					stonesInHand--;
+			} 
+			else { // else continue on and don't capture
+				
+				currentPos++; //move to next pit
+				if (currentPos != 0) { //if current position is not past player B's goal aka not positiot 6 (b/c pos 6 is player B's pit)
+					pList.get(currentPos).addStone(1); // continue adding 1 stone to that pit
+					stonesInHand--; //now we have 1 less stone in our hand
+				}
+				else if (currentPos == 5) { // In this case we must skip player A's goal and go straight back to pit 0
+					currentPos = 0; //reset the current position to 0
+					pList.get(currentPos).addStone(1);
+					stonesInHand--;
+				}
+				else { // Case: We have advanced pass Player A's Side...
+					
+					aPitGoal.addStone(1); //since we have advanced pass we should put a stone in Player A's goal
+					stonesInHand--;
+			
+					if (stonesInHand == 0 ) { //if the number of stones left in hand is 0 and we just added to A's goal.. free turn for A
+						//TODO Perform Free Turn Method Here.
+							changePlayerTurns(); // gets negated at the exit of the while loop therefore still player A's turn
+						break;
+					}
+					else { // else continue on adding stones to pits until stones in hand is empty
+						pList.get(currentPos).addStone(1);
+						stonesInHand--;
+					}
+				}
+				
+			}
+		} // end of while loop. stones in hand is now empty
+		
+		// Check if the game has ended. If it hasn't change turns.
+		if (endGameConditionMet()) {
+			System.out.println("Game Over. Player X has won!");
+			//TODO function to count stones in each goal to determine who won.
+		}
+		else {
+			changePlayerTurns();
 		}
 	}
 	
