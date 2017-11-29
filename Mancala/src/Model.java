@@ -54,17 +54,15 @@ public class Model {
 	 */
 	public void undo() {
 		pList = savedPList;
-		updateViews();
+		updateBronsinsModel();
 	}
 
 	
 	/**
 	 * When called updates all views based on the data structure ArrayList<ModelPit> pList
 	 */
-	public void updateViews() {
-		for (ChangeListener cL : listeners) { //notify all listeners that the state has changed.
-			cL.stateChanged(event); //model object is passed to the stateChanged functions.
-		}
+	public void updateBronsinsModel() {
+		
 	}
 	
 	/**
@@ -175,18 +173,15 @@ public class Model {
 					}
 				}
 				
-				//Now there are no more stones in hand... check if either side's pits are empty. Then change turns.
-				//Check for win condition
-				
+
+				// Check if the game has ended. If it hasn't change turns.
 				if (endGameConditionMet()) {
-					//Function for  GAME OVER!!! GG
+					System.out.println("Game Over. Player X has won!");
+					//TODO function to count stones in each goal to determine who won.
+					
 				}
-				
-				//Check if player still has free turn	
-				if (freeTurn) {
-					//don't change PlayerTurns
-				} else {
-					changePlayerTurns(); //change PlayerTurns
+				else {
+					changePlayerTurns();
 				}
 			}
 		}
@@ -208,13 +203,34 @@ public class Model {
 	}
 	
 	/**
-	 * Checks if a win condition has been met yet
+	 * Checks if a the game has ended.
 	 * 
-	 * @return ???
+	 * @return true // if the game has ended.
 	 */
 	public boolean endGameConditionMet () {
+		int numberOfEmptyPitsA =0;
+		int numberOfEmptyPitsB =0;
 		
-		return false;
+		//Check # of Empty Pits in Player A's Side
+		for (int i = 0; i <=5 ; i++) {
+			if (pList.get(i).isEmpty()) {
+				numberOfEmptyPitsA++;
+			}
+		}
+		
+		//Check # of Empty Pits in Player B's Side
+		for (int i = 6; i <=11 ; i++) {
+			if (pList.get(i).isEmpty()) {
+				numberOfEmptyPitsB++;
+			}
+		}
+	
+		if (numberOfEmptyPitsA == 6 || numberOfEmptyPitsB == 6) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }
