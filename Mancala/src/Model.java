@@ -140,51 +140,56 @@ public class Model {
 		int stonesInHand = pList.get(currentPos).emptyPit(); //Pick up stones in hand... So pit is empty...
 		
 		while (stonesInHand != 0) { // While we still have stones in our hand...
-			currentPos++; //move to next pit
-
-			if (currentPos != 6) { //if current position is not past player A's goal aka not positiot 6 (b/c pos 6 is player B's pit)
-				pList.get(currentPos).addStone(1); // continue adding 1 stone to that pit
-				stonesInHand--; //now we have 1 less stone in our hand
-			}
-			else if (currentPos == 11) { // In this case we must skip the goal and go straight back to pit 0
-				currentPos = 0; //reset the current position to 0
-				pList.get(currentPos).addStone(1);
-				stonesInHand--;
-			}
-			else { // Case: We have advanced pass Player A's Side...
-				
-				aPitGoal.addStone(1); //since we have advanced pass we should put a stone in Player A's goal
-				stonesInHand--;
+			int nextPosAfterCurrent = currentPos++;
+			
+			// Capture Condition... LAST STONE... Next pit is still on your side.... AND IT's EMPTY
+			if (stonesInHand == 1 && nextPosAfterCurrent <= 5 && pList.get(currentPos).isEmpty()) { 
+					// TODO perform capture method here....
+					stonesInHand--;
+			} 
+			else { // else continue on and don't capture
 		
-				if (stonesInHand == 0 ) { //if the number of stones left in hand is 0 and we just added to A's goal.. free turn for A
-					//TODO Perform Free Turn Method Here.
-						// Still Player A's Turn....
-					break; //Exit while loop
+				currentPos++; //move to next pit
+				if (currentPos != 6) { //if current position is not past player A's goal aka not positiot 6 (b/c pos 6 is player B's pit)
+					pList.get(currentPos).addStone(1); // continue adding 1 stone to that pit
+					stonesInHand--; //now we have 1 less stone in our hand
 				}
-				else { // else continue on adding stones to pits until stones in hand is empty
+				else if (currentPos == 11) { // In this case we must skip player B's goal and go straight back to pit 0
+					currentPos = 0; //reset the current position to 0
 					pList.get(currentPos).addStone(1);
 					stonesInHand--;
 				}
-			}
-			//Check if we should capture or not...	
+				else { // Case: We have advanced pass Player A's Side...
+					
+					aPitGoal.addStone(1); //since we have advanced pass we should put a stone in Player A's goal
+					stonesInHand--;
 			
-			//Check for win condition
-			if (winConditionMet()) {
-				//Function for  GAME OVER!!! GG
-			}
-			
-			//Check if player still has free turn
-			if (freeTurn) {
-				//don't change PlayerTurns
-			} else {
-				changePlayerTurns(); //change PlayerTurns
+					if (stonesInHand == 0 ) { //if the number of stones left in hand is 0 and we just added to A's goal.. free turn for A
+						//TODO Perform Free Turn Method Here.
+							// Still Player A's Turn.... so exit this while loop
+						break;
+					}
+					else { // else continue on adding stones to pits until stones in hand is empty
+						pList.get(currentPos).addStone(1);
+						stonesInHand--;
+					}
+				}
+				
+				//Now there are no more stones in hand... check if either side's pits are empty. Then change turns.
+				//Check for win condition
+				
+				if (endGameConditionMet()) {
+					//Function for  GAME OVER!!! GG
+				}
+				
+				//Check if player still has free turn	
+				if (freeTurn) {
+					//don't change PlayerTurns
+				} else {
+					changePlayerTurns(); //change PlayerTurns
+				}
 			}
 		}
-		//WHILE WE DO Have 1 stone left in our hand....
-		if (pList.get(currentPos).isEmpty()){ //if the current selected pit is empty place the last pebble here and capture!
-			// TODO perform capture method here....
-		}
-		// else do nothing and don't capture
 	}
 	
 	/**
@@ -198,39 +203,7 @@ public class Model {
 		int stonesInHand = pList.get(pitPos).emptyPit();
 		
 		while (stonesInHand != 0) {
-			currentPos++; //move to next pit
-			if (currentPos != 12) { //if current pit position is not out of index
-				pList.get(currentPos).addStone(1); //add 1 stone to that pit
-				stonesInHand--; //now we have 1 less stone in our hand
-			}
-			else { // case: pit position is out of index
-				bPitGoal.addStone(1); //if current pos is in player B's pit then first... add stone to player B's goal
-				stonesInHand--;
-				if (stonesInHand == 0 ) { //if the number of stones left in hand is 0 and we just added to a goal.. free turn for B
-					freeTurn = true;
-					break; //Exit while loop
-				}
-				else { // else continue on adding stones to pit until stones in hand is empty
-					currentPos = 0; // resets current position because we advanced past playerB's goal...
-					pList.get(currentPos).addStone(1);
-					stonesInHand--;
-				}
-			}
-			//Check if we should capture or not...
-			
-			
-			
-			//Check for win condition
-			if (winConditionMet()) {
-				//Function for  GAME OVER!!! GG
-			}
-			
-			//Check if player still has free turn
-			if (freeTurn) {
-				//don't change PlayerTurns
-			} else {
-				changePlayerTurns();
-			}
+	
 		}
 	}
 	
@@ -239,7 +212,8 @@ public class Model {
 	 * 
 	 * @return ???
 	 */
-	public boolean winConditionMet () {
+	public boolean endGameConditionMet () {
+		
 		return false;
 	}
 
