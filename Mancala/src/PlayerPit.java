@@ -12,9 +12,8 @@ public class PlayerPit extends JButton implements Pit{
 	private ArrayList<Stone> stones;
 	private Rectangle2D.Double s;
 	
-	public PlayerPit(String player, Color color) {
+	public PlayerPit(String player) {
 		stones = new ArrayList<>();
-		this.setBackground(color);
 		this.setPreferredSize(new Dimension(100, 200));
 		//this.setSize(sizeW, sizeH);
 		this.setEnabled(false);

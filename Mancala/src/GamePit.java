@@ -13,10 +13,9 @@ public class GamePit extends JButton implements Pit{
 	private ArrayList<Stone> stones;
 	private Rectangle2D.Double s;
 
-	public GamePit(int stoneAmount, String player, int size, Color color) {
+	public GamePit(int stoneAmount, String player, int size) {
 		stones = new ArrayList<>();
 		this.setSize(size, size);
-		this.setBackground(color);
 		this.setLayout(new GridLayout(0, 5));
 		for(int i = 0; i < stoneAmount; i++) {
 			this.add(new Stone(10));
