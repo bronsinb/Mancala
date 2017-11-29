@@ -12,13 +12,15 @@ import javax.swing.*;
 public class GamePit extends JButton implements Pit{
 	private ArrayList<Stone> stones;
 	private Rectangle2D.Double s;
+	private Color stoneColor;
 
-	public GamePit(int stoneAmount, String player, int size) {
+	public GamePit(int stoneAmount, String player, int size, Color stoneColor) {
 		stones = new ArrayList<>();
+		this.stoneColor = stoneColor;
 		this.setSize(size, size);
 		this.setLayout(new GridLayout(0, 5));
 		for(int i = 0; i < stoneAmount; i++) {
-			this.add(new Stone(10));
+			this.add(new Stone(10, stoneColor));
 		}
 	}
 	
@@ -26,7 +28,7 @@ public class GamePit extends JButton implements Pit{
 	public void addStone(int s) {
 		// TODO Auto-generated method stub
 		for(int i = 0; i < s; i++) {
-			stones.add(new Stone(10));
+			stones.add(new Stone(10, stoneColor));
 		}
 	}
 
@@ -43,5 +45,11 @@ public class GamePit extends JButton implements Pit{
 		for(Stone s: stones) {
 			this.add(s);
 		}
+	}
+
+	@Override
+	public ArrayList<Stone> getStones() {
+		// TODO Auto-generated method stub
+		return stones;
 	}
 }
