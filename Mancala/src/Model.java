@@ -75,17 +75,25 @@ public class Model {
 	 * @param pitPos
 	 */
 	public void checkCorrectPitSelected (int pitPos) {
-		saveState();
-		if (playerAsTurn() && pitPos <= 5) {
-			System.out.println("Correct Pit Selected");
-			checkIfSelectedPitIsEmpty(pitPos);
-			moveStonesPlayerA(pitPos);
+		
+		//First check if the pit is empty to begin with....
+		if (checkIfSelectedPitIsEmpty(pitPos)) {
+			System.out.println("That pit is empty! Select a pit with stones on your side!");
 		}
-		else if (!playerAsTurn() && pitPos > 5) {
-			System.out.println("Correct Pit Selected");
-		}
-		else {
-			System.out.println("Wrong Pit Selected. Please choose your own Pit.");
+		else { //Then check if the pit belongs to the player... 
+			if (playerAsTurn() && pitPos <= 5) {
+				saveState(); // saves current state before moving
+				System.out.println("Correct Pit Selected");
+				moveStonesPlayerA(pitPos);
+
+			}
+			else if (!playerAsTurn() && pitPos > 5) {
+				System.out.println("Correct Pit Selected");
+			}
+			else {
+				System.out.println("Wrong Pit Selected. Please choose your own Pit.");
+			}
+			
 		}
 	}
 	
