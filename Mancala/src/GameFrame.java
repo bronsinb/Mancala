@@ -54,8 +54,19 @@ public class GameFrame extends JFrame{
 				
 			}
 			else {
+				int b = i; // clone of i for anonymous class
+				
 				pits[i] = new GamePit(stoneAmount, "B", 50);
 				style.styleGamePits(pits[i]);
+				
+				// Add action listeners to every single pit button again for part B.
+				pits[i].addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						model.checkCorrectPitSelected(b);
+					}
+				});
 			}
 		}
 		

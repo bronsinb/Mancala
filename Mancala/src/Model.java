@@ -78,6 +78,7 @@ public class Model {
 		saveState();
 		if (playerAsTurn() && pitPos <= 5) {
 			System.out.println("Correct Pit Selected");
+			checkIfSelectedPitIsEmpty(pitPos);
 			moveStonesPlayerA(pitPos);
 		}
 		else if (!playerAsTurn() && pitPos > 5) {
@@ -85,6 +86,22 @@ public class Model {
 		}
 		else {
 			System.out.println("Wrong Pit Selected. Please choose your own Pit.");
+		}
+	}
+	
+	/**
+	 * This function checks if the selected pit doesn't have any stones. If it doesn't have any stones
+	 * it returns true.
+	 * 
+	 * returns true // if no stones
+	 */
+	public boolean checkIfSelectedPitIsEmpty (int pitPos) {
+		int stonesInSelectedPit = pList.get(pitPos).returnStones();
+		if (stonesInSelectedPit == 0) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 	
