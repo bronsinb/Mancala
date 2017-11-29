@@ -139,22 +139,29 @@ public class Model {
 		int currentPos = pitPos;
 		int stonesInHand = pList.get(currentPos).emptyPit(); //Pick up stones in hand... So pit is empty...
 		
-		while (stonesInHand != 1) { //WHILE WE DON'T Have 1 stone left in our hand....
+		while (stonesInHand != 0) { // While we still have stones in our hand...
 			currentPos++; //move to next pit
 
-			if (currentPos != 6) { //if current position is not the player B's position...
-				pList.get(currentPos).addStone(1); //add 1 stone to that pit
+			if (currentPos != 6) { //if current position is not past player A's goal aka not positiot 6 (b/c pos 6 is player B's pit)
+				pList.get(currentPos).addStone(1); // continue adding 1 stone to that pit
 				stonesInHand--; //now we have 1 less stone in our hand
 			}
-			else {
-				aPitGoal.addStone(1); //if current pos is in player B's pit then first... add stone to player A's goal
+			else if (currentPos == 11) { // In this case we must skip the goal and go straight back to pit 0
+				currentPos = 0; //reset the current position to 0
+				pList.get(currentPos).addStone(1);
 				stonesInHand--;
+			}
+			else { // Case: We have advanced pass Player A's Side...
 				
-				if (stonesInHand == 0 ) { //if the number of stones left in hand is 0 and we just added to a goal.. free turn for A
-					//Do Free Turn here.
+				aPitGoal.addStone(1); //since we have advanced pass we should put a stone in Player A's goal
+				stonesInHand--;
+		
+				if (stonesInHand == 0 ) { //if the number of stones left in hand is 0 and we just added to A's goal.. free turn for A
+					//TODO Perform Free Turn Method Here.
+						// Still Player A's Turn....
 					break; //Exit while loop
 				}
-				else { // else continue on adding stones to pit until stones in hand is empty
+				else { // else continue on adding stones to pits until stones in hand is empty
 					pList.get(currentPos).addStone(1);
 					stonesInHand--;
 				}
