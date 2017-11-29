@@ -137,13 +137,11 @@ public class Model {
 	 */
 	public void moveStonesPlayerA(int pitPos) {
 		int currentPos = pitPos;
-		int stonesInHand = pList.get(pitPos).emptyPit();
+		int stonesInHand = pList.get(currentPos).emptyPit(); //Pick up stones in hand... So pit is empty...
 		
-		while (stonesInHand != 1) {
+		while (stonesInHand != 1) { //WHILE WE DON'T Have 1 stone left in our hand....
 			currentPos++; //move to next pit
-			if (pList.get(currentPos).isEmpty()){ //if the current selected pit is empty place the last pebble here and capture!
-				
-			}
+
 			if (currentPos != 6) { //if current position is not the player B's position...
 				pList.get(currentPos).addStone(1); //add 1 stone to that pit
 				stonesInHand--; //now we have 1 less stone in our hand
@@ -161,9 +159,7 @@ public class Model {
 					stonesInHand--;
 				}
 			}
-			//Check if we should capture or not...
-			
-			
+			//Check if we should capture or not...	
 			
 			//Check for win condition
 			if (winConditionMet()) {
@@ -177,6 +173,11 @@ public class Model {
 				changePlayerTurns(); //change PlayerTurns
 			}
 		}
+		//WHILE WE DO Have 1 stone left in our hand....
+		if (pList.get(currentPos).isEmpty()){ //if the current selected pit is empty place the last pebble here and capture!
+			// TODO perform capture method here....
+		}
+		// else do nothing and don't capture
 	}
 	
 	/**
