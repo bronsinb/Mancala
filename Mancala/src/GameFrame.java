@@ -7,7 +7,6 @@ public class GameFrame extends JFrame{
 	private GamePit[] pits;
 	private PlayerPit[] playerPits;
 	private JPanel grid;
-	private Rectangle2D.Double gameBoard;
 	
 	public GameFrame(int stoneAmount, MancalaStyle style) {
 		this.setLayout(new BorderLayout());
@@ -15,7 +14,6 @@ public class GameFrame extends JFrame{
 		playerPits = new PlayerPit[2];
 		grid = new JPanel(new GridLayout(4, 6));
 		style.stylePanel(grid);
-		gameBoard = new Rectangle2D.Double(0, 0, 1000, 400);
 		
 		setSize(1000, 400);
 		
@@ -29,6 +27,7 @@ public class GameFrame extends JFrame{
 		
 		for(int i = 6; i > 0; i--) {
 			JLabel text = new JLabel("B" + (i), SwingConstants.CENTER);
+			text.setFont(new Font("SansSerif", Font.BOLD, 17));
 			style.styleText(text);
 			grid.add(text);
 		}
@@ -50,6 +49,7 @@ public class GameFrame extends JFrame{
 		
 		for(int i = 0; i < 6; i++) {
 			JLabel text = new JLabel("A" + (i + 1), SwingConstants.CENTER);
+			text.setFont(new Font("SansSerif", Font.BOLD, 17));
 			style.styleText(text);
 			grid.add(text);
 		}
@@ -68,13 +68,16 @@ public class GameFrame extends JFrame{
 		style.stylePanel(top);
 		top.setLayout(new BorderLayout());
 		JLabel playerA = new JLabel("Player A", SwingConstants.CENTER);
+		playerA.setFont(new Font("SansSerif", Font.PLAIN, 18));
 		style.styleText(playerA);
 		playerA.setPreferredSize(new Dimension(200, 40));
 		JLabel playerB = new JLabel("Player B", SwingConstants.CENTER);
+		playerB.setFont(new Font("SansSerif", Font.PLAIN, 18));
 		style.styleText(playerB);
 		playerB.setPreferredSize(new Dimension(200, 40));
 		top.add(playerA, BorderLayout.LINE_START);
 		JLabel mancalaLogo = new JLabel("MANCALA", SwingConstants.CENTER);
+		mancalaLogo.setFont(new Font("SansSerif", Font.BOLD, 22));
 		top.add(mancalaLogo, BorderLayout.CENTER);
 		style.styleText(mancalaLogo);
 		top.add(playerB, BorderLayout.LINE_END);
@@ -104,7 +107,7 @@ public class GameFrame extends JFrame{
 	}
 	
 	public static void main(String[] args) {		
-		GameFrame comp = new GameFrame(4, new BlackWhiteStyle());
+		GameFrame comp = new GameFrame(4, new ColoredStyle());
 		
 		comp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		comp.setVisible(true);
