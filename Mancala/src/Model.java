@@ -200,27 +200,27 @@ public class Model {
 			int nextPosAfterCurrent = currentPos++;
 			
 			// Capture Condition... LAST STONE... Next pit is still on your side.... AND IT's EMPTY
-			if (stonesInHand == 1 && nextPosAfterCurrent >= 6 && nextPosAfterCurrent <= 11 && pList.get(currentPos).isEmpty()) { 
+			if (stonesInHand == 1 && nextPosAfterCurrent <= 5 && pList.get(currentPos).isEmpty()) { 
 					// TODO perform capture method here....
 					stonesInHand--;
 			} 
 			else { // else continue on and don't capture
-				
+		
 				currentPos++; //move to next pit
-				if (currentPos != 0) { //if current position is not past player B's goal aka not positiot 6 (b/c pos 6 is player B's pit)
+				if (currentPos > 6 && currentPos != 11 || currentPos < 6) { //if current position is not near a goal
 					pList.get(currentPos).addStone(1); // continue adding 1 stone to that pit
 					stonesInHand--; //now we have 1 less stone in our hand
 				}
-				else if (currentPos == 5) { // In this case we must skip player A's goal and go straight back to pit 0
+				else if (currentPos == 11) { // In this case we must skip player B's goal and go straight back to pit 0
 					currentPos = 0; //reset the current position to 0
 					pList.get(currentPos).addStone(1);
 					stonesInHand--;
 				}
-				else { // Case: We have advanced pass Player A's Side...
+				else { // AKA Case (currentPos == 6)... We have advanced pass Player A's Side...
 					
 					aPitGoal.addStone(1); //since we have advanced pass we should put a stone in Player A's goal
 					stonesInHand--;
-			
+					
 					if (stonesInHand == 0 ) { //if the number of stones left in hand is 0 and we just added to A's goal.. free turn for A
 						//TODO Perform Free Turn Method Here.
 							changePlayerTurns(); // gets negated at the exit of the while loop therefore still player A's turn
