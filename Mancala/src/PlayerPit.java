@@ -12,9 +12,11 @@ public class PlayerPit extends JButton implements Pit{
 	private ArrayList<Stone> stones;
 	private Rectangle2D.Double s;
 	private Color stoneColor;
+	private String player;
 	
 	public PlayerPit(String player, Color stoneColor) {
 		stones = new ArrayList<>();
+		this.player = player;
 		this.stoneColor = stoneColor;
 		this.setPreferredSize(new Dimension(100, 200));
 		//this.setSize(sizeW, sizeH);
@@ -34,9 +36,11 @@ public class PlayerPit extends JButton implements Pit{
 	}
 	
 	@Override
-	public void clear() {
+	public int clear() {
 		// TODO Auto-generated method stub
+		int num = stones.size();
 		stones.clear();
+		return num;
 	}
 
 	@Override
@@ -52,5 +56,9 @@ public class PlayerPit extends JButton implements Pit{
 	public ArrayList<Stone> getStones() {
 		// TODO Auto-generated method stub
 		return stones;
+	}
+	
+	public String getName() {
+		return player;
 	}
 }
