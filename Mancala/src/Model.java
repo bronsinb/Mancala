@@ -148,21 +148,18 @@ public class Model {
 			else { // else continue on and don't capture
 		
 				currentPos++; //move to next pit
-				if (currentPos != 6 || currentPos != 11) { //if current position is not near a goal or is not about to wrap around
+				if (currentPos == 12) {currentPos = 0;} // wrap around // reset position
+				
+				if (currentPos != 6) { //if current position has not already advanced past own goal
 					pList.get(currentPos).addStone(1); // continue adding 1 stone to that pit
 					stonesInHand--; //now we have 1 less stone in our hand
 				}
-				else if (currentPos == 11) { // In this case we must skip player B's goal and go straight back to pit 0
-					currentPos = 0; //reset the current position to 0
-					pList.get(currentPos).addStone(1);
-					stonesInHand--;
-				}
-				else { // AKA Case (currentPos == 6)... We have advanced pass Player A's Side...
+				else { // AKA Case (currentPos == 6)... We have advanced passed our own goal...
 					
-					aPitGoal.addStone(1); //since we have advanced pass we should put a stone in Player A's goal
+					aPitGoal.addStone(1); //since we have advanced pass our goal we should put a stone in our goal
 					stonesInHand--;
 					
-					if (stonesInHand == 0 ) { //if the number of stones left in hand is 0 and we just added to A's goal.. free turn for A
+					if (stonesInHand == 0 ) { //if we have no stones left after placing a stone in our own goal... free turn for us
 						//TODO Perform Free Turn Method Here.
 							changePlayerTurns(); // gets negated at the exit of the while loop therefore still player A's turn
 						break;
@@ -200,28 +197,23 @@ public class Model {
 			int nextPosAfterCurrent = currentPos++;
 			
 			// Capture Condition... LAST STONE... Next pit is still on your side.... AND IT's EMPTY
-			if (stonesInHand == 1 && nextPosAfterCurrent <= 5 && pList.get(currentPos).isEmpty()) { 
+			if (stonesInHand == 1 && nextPosAfterCurrent > 5 && (nextPosAfterCurrent != 0) && pList.get(currentPos).isEmpty()) { 
 					// TODO perform capture method here....
 					stonesInHand--;
 			} 
 			else { // else continue on and don't capture
 		
 				currentPos++; //move to next pit
-				if (currentPos != 6 || currentPos != 11) { //if current position is not near a goal or is not about to wrap around
+				if (currentPos == 12) {currentPos = 0;} // wrap around // reset position
+				
+				if (currentPos != 0) { //if current position has not already advanced past own goal
 					pList.get(currentPos).addStone(1); // continue adding 1 stone to that pit
 					stonesInHand--; //now we have 1 less stone in our hand
 				}
-				else if (currentPos == 11) { // In this case we must skip player B's goal and go straight back to pit 0
-					currentPos = 0; //reset the current position to 0
-					pList.get(currentPos).addStone(1);
+				else { // AKA Case (currentPos == 0)... We have advanced pass our own goal...
+					aPitGoal.addStone(1); //since we have advanced pass our goal we should put a stone in our goal
 					stonesInHand--;
-				}
-				else { // AKA Case (currentPos == 6)... We have advanced pass Player A's Side...
-					
-					aPitGoal.addStone(1); //since we have advanced pass we should put a stone in Player A's goal
-					stonesInHand--;
-					
-					if (stonesInHand == 0 ) { //if the number of stones left in hand is 0 and we just added to A's goal.. free turn for A
+					if (stonesInHand == 0 ) { //if we have no stones left after placing a stone in our own goal... free turn for us
 						//TODO Perform Free Turn Method Here.
 							changePlayerTurns(); // gets negated at the exit of the while loop therefore still player A's turn
 						break;
