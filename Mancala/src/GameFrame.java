@@ -6,6 +6,8 @@ import java.awt.geom.*;
 import javax.swing.*;
 
 public class GameFrame extends JFrame{
+	private Model model = new Model(4); //Creating Model here.... Temporarily set to 4 stones....
+	
 	private GamePit[] pits;
 	private PlayerPit[] playerPits;
 	private JPanel grid;
@@ -37,6 +39,7 @@ public class GameFrame extends JFrame{
 	
 		for(int i = 0; i < pits.length; i++) {
 			if(i < 6) {
+        int b = i; // clone of i for anonymous class
 				pits[i] = new GamePit(stoneAmount, 0, 50, style.styleStones());
 				pits[i].addActionListener(new ActionListener() {
 					@Override
@@ -61,8 +64,19 @@ public class GameFrame extends JFrame{
 					}
 				});
 				style.styleGamePits(pits[i]);
+				
+				// Add action listeners to every single pit button.
+				pits[i].addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						model.checkCorrectPitSelected(b);
+					}
+				});
+				
 			}
 			else {
+
 				pits[i] = new GamePit(stoneAmount, 0, 50, style.styleStones());
 				pits[i].addActionListener(new ActionListener() {
 					@Override
@@ -86,7 +100,17 @@ public class GameFrame extends JFrame{
 						revalidate();
 					}
 				});
+
 				style.styleGamePits(pits[i]);
+				
+				// Add action listeners to every single pit button again for part B.
+				pits[i].addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						model.checkCorrectPitSelected(b);
+					}
+				});
 			}
 		}
 		
