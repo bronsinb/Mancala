@@ -161,6 +161,7 @@ public class Model {
 					
 					if (stonesInHand == 0 ) { //if we have no stones left after placing a stone in our own goal... free turn for us
 						//TODO Perform Free Turn Method Here.
+							System.out.println("Free turn for Player A Again...");
 							changePlayerTurns(); // gets negated at the exit of the while loop therefore still player A's turn
 						break;
 					}
@@ -215,7 +216,8 @@ public class Model {
 					stonesInHand--;
 					if (stonesInHand == 0 ) { //if we have no stones left after placing a stone in our own goal... free turn for us
 						//TODO Perform Free Turn Method Here.
-							changePlayerTurns(); // gets negated at the exit of the while loop therefore still player A's turn
+							System.out.println("Free turn for Player B Again...");
+							changePlayerTurns(); // gets negated at the exit of the while loop therefore still player B's turn
 						break;
 					}
 					else { // else continue on adding stones to pits until stones in hand is empty
