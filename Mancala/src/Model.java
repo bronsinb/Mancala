@@ -12,6 +12,9 @@ public class Model {
 	
 	private ArrayList<ModelPit> pList;
 	private ArrayList<ModelPit> savedPList;
+	
+	private GamePit[] referenceToBronsinsPits; //needed to update Bronsin's model
+	
 	private ModelPit aPitGoal;
 	private ModelPit bPitGoal;
 	
@@ -268,6 +271,14 @@ public class Model {
 		else {
 			return false;
 		}
+	}
+	
+	/**
+	 * Updates Bronsin's Model
+	 */
+	public void updateBronsinModel () {
+		//TODO update all pits in Bronsin's model...
+		//referenceToBronsinsPits.dosomethig();
 	}
 
 }
