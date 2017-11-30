@@ -198,7 +198,7 @@ public class Model {
 			int nextPosAfterCurrent = currentPos++;
 			
 			// Capture Condition... LAST STONE... Next pit is still on your side.... AND IT's EMPTY
-			if (stonesInHand == 1 && nextPosAfterCurrent > 5 && (nextPosAfterCurrent != 0) && pList.get(currentPos).isEmpty()) { 
+			if (stonesInHand == 1 && nextPosAfterCurrent > 5 && (nextPosAfterCurrent != 12) && pList.get(currentPos).isEmpty()) { 
 					// TODO perform capture method here....
 					stonesInHand--;
 			} 
