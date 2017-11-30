@@ -148,7 +148,7 @@ public class Model {
 			else { // else continue on and don't capture
 		
 				currentPos++; //move to next pit
-				if (currentPos > 6 && currentPos != 11 || currentPos < 6) { //if current position is not near a goal
+				if (currentPos != 6 || currentPos != 11) { //if current position is not near a goal or is not about to wrap around
 					pList.get(currentPos).addStone(1); // continue adding 1 stone to that pit
 					stonesInHand--; //now we have 1 less stone in our hand
 				}
@@ -207,7 +207,7 @@ public class Model {
 			else { // else continue on and don't capture
 		
 				currentPos++; //move to next pit
-				if (currentPos > 6 && currentPos != 11 || currentPos < 6) { //if current position is not near a goal
+				if (currentPos != 6 || currentPos != 11) { //if current position is not near a goal or is not about to wrap around
 					pList.get(currentPos).addStone(1); // continue adding 1 stone to that pit
 					stonesInHand--; //now we have 1 less stone in our hand
 				}
