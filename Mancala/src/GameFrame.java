@@ -145,22 +145,7 @@ public class GameFrame extends JFrame{
 		style.styleText(undo);
 		undo.setText("UNDO");
 
-		JButton next = new JButton();
-		next.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				int num = pits[3].clear();
-				if(num != 0) {
-					for(int i = 3; i < num + 3; i++) {
-						pits[i + 1].addStone(1);
-					}
-				}
-				repaint();
-				revalidate();
-			}
-		});
-		
+		JButton next = new JButton();		
 		style.styleButtons(next);
 		style.styleText(next);
 		next.setText("NEXT");
