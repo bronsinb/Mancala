@@ -40,7 +40,7 @@ public class GameFrame extends JFrame{
 		for(int i = 0; i < pits.length; i++) {
 			if(i < 6) {
 
-        int b = i; // clone of i for anonymous class
+        int c = i; // clone of i for anonymous class
 				pits[i] = new GamePit(stoneAmount, 0, 50, style.styleStones());
 				pits[i].addActionListener(new ActionListener() {
 					@Override
@@ -72,14 +72,14 @@ public class GameFrame extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						model.checkCorrectPitSelected(b);
+						model.checkCorrectPitSelected(c);
 					}
 				});
 				
 			}
 			else {
 
-  			int b = i; // clone of i for anonymous class
+  			int c = i; // clone of i for anonymous class
 				pits[i] = new GamePit(stoneAmount, 0, 50, style.styleStones());
 				pits[i].addActionListener(new ActionListener() {
 					@Override
@@ -111,7 +111,7 @@ public class GameFrame extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						model.checkCorrectPitSelected(b);
+						model.checkCorrectPitSelected(c);
 					}
 				});
 			}
