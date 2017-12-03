@@ -12,6 +12,8 @@ public class Model {
 	private ArrayList<ModelPit> pList;
 	private int[] stateA;
 	private int[] stateB;
+	private int[] goalStatesA;
+	private int[] goalStatesB;
 	
 	private ModelPit aPitGoal;
 	private ModelPit bPitGoal;
@@ -35,6 +37,9 @@ public class Model {
 		pList = new ArrayList<ModelPit> ();
 		stateA = new int[12];
 		stateB = new int[12];
+		goalStatesA = new int[2];
+		goalStatesB = new int[2];
+		
 		for (int i = 0; i <= 11; i ++) {
 			pList.add(new ModelPit(startingStones)); //Each Pit will be initialized with 3 or 4 stones and
 			//added to an arrayList of Pits
@@ -51,11 +56,15 @@ public class Model {
 		for (int i = 0; i < pList.size(); i++) {
 			stateA[i] = pList.get(i).returnStones();
 		}
+		goalStatesA[0] = aPitGoal.returnStones();
+		goalStatesA[1] = bPitGoal.returnStones();
 	}
 	public void saveStateB() {
 		for (int i = 0; i < pList.size(); i++) {
 			stateB[i] = pList.get(i).returnStones();
 		}
+		goalStatesB[0] = aPitGoal.returnStones();
+		goalStatesB[1] = bPitGoal.returnStones();
 	}
 	
 	/**
@@ -63,6 +72,7 @@ public class Model {
 	 */
 	public void undo() {
 		if (!firstTurnCompleted) {
+			//UNDO DO NOTHING UNTIL FIRST TURN COMPLETE
 		}
 		else {
 			if(!playerATurn) {
@@ -70,6 +80,8 @@ public class Model {
 				for (int i = 0; i < pList.size(); i++) {
 					pList.get(i).setStones(stateA[i]);
 				}			
+				aPitGoal.setStones(goalStatesA[0]);
+				bPitGoal.setStones(goalStatesA[1]);
 				updateBronsinModel();
 			}
 			else {
@@ -79,6 +91,8 @@ public class Model {
 				for (int i = 0; i < pList.size(); i++) {
 					pList.get(i).setStones(stateB[i]);
 				}			
+				aPitGoal.setStones(goalStatesB[0]);
+				bPitGoal.setStones(goalStatesB[1]);
 				updateBronsinModel();
 			}
 		}
