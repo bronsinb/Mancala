@@ -3,9 +3,6 @@
  */
 import java.util.ArrayList;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 public class Model {
 	private boolean playerATurn;
 	private boolean firstTurnCompleted = false;
@@ -18,7 +15,7 @@ public class Model {
 	private ModelPit aPitGoal;
 	private ModelPit bPitGoal;
 	private int currentPos;
-	private int nextPosAfterCurrentPos;
+
 	
 	private GameFrame refToBronsinsFrame;
 	
@@ -87,7 +84,6 @@ public class Model {
 			else {
 				changePlayerTurns();
 				System.out.println("Else undo B!");
-				changePlayerTurns();
 				for (int i = 0; i < pList.size(); i++) {
 					pList.get(i).setStones(stateB[i]);
 				}			
