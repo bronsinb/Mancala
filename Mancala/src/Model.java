@@ -33,8 +33,8 @@ public class Model {
 		refToBronsinsFrame = gameFrame;
 		
 		pList = new ArrayList<ModelPit> ();
-		stateA = new ArrayList<ModelPit> ();
-		stateB = new ArrayList<ModelPit> ();
+		stateA = new ArrayList<ModelPit> (12);
+		stateB = new ArrayList<ModelPit> (12);
 		for (int i = 0; i <= 11; i ++) {
 			pList.add(new ModelPit(startingStones)); //Each Pit will be initialized with 3 or 4 stones and
 			//added to an arrayList of Pits
@@ -48,12 +48,15 @@ public class Model {
 	 * This saveState should be called at the start of the player's turn. Always save state b4 making a move.
 	 */
 	public void saveStateA() {
-		stateA.clear();
+
+		int[] data = new int[12];
+		
 		for (int i = 0; i < pList.size(); i++) {
-			System.out.println("RETURNING SIZE Plist: " + pList.size());
+			pList.get(i).returnStones();
+			//System.out.println("RETURNING SIZE Plist: " + pList.size());
 			stateA.add(pList.get(i));
-			System.out.println("RETURNING SIZE A: " + stateA.size());
-			//System.out.println("RETURNING STONES: " + stateA.get(i).returnStones());
+			//System.out.println("RETURNING SIZE A: " + stateA.size());
+			System.out.println("RETURNING STONES: " + stateA.get(i).returnStones());
 		}
 	}
 	public void saveStateB() {
@@ -76,20 +79,23 @@ public class Model {
 			pList.clear();
 			System.out.println("RETURNING SIZE Plist: " + pList.size());
 			if(!playerATurn) {
+				changePlayerTurns();
 				System.out.println("Else undo A!");
 				for (int i = 0; i < stateA.size(); i++) {
 					pList.add(stateA.get(i)); 
-					System.out.println("RETURNING SIZE Plist: " + pList.size());
-					//System.out.println("Number of Stones for[" + i + "]" + pList.get(i).returnStones());
+					//System.out.println("RETURNING SIZE Plist: " + pList.size());
+					System.out.println("Number of Stones for stateA[" + i + "]" + pList.get(i).returnStones());
 				}			
 				updateBronsinModel();
 			}
 			else {
+				changePlayerTurns();
 				System.out.println("Else undo B!");
 				for (int i = 0; i < stateB.size(); i++) {
 					pList.add(stateB.get(i)); 
 					System.out.println("RETURNING SIZE Plist: " + pList.size());
 					//System.out.println("Number of Stones for[" + i + "]" + pList.get(i).returnStones());
+					System.out.println("Number of Stones for stateB[" + i + "]" + pList.get(i).returnStones());
 				}
 				updateBronsinModel();
 			}
