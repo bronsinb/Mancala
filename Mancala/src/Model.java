@@ -21,6 +21,8 @@ public class Model {
 	private ChangeEvent event;
 	private ArrayList<ChangeListener> listeners;
 	
+	private GameFrame refToBronsinsFrame;
+	
 	/**
 	 * Initializes each pit with a set number of stones. 
 	 * 
@@ -30,7 +32,9 @@ public class Model {
 	 * 
 	 * @param startingStones
 	 */
-	Model(int startingStones) {
+	Model(int startingStones, GameFrame gameFrame) {
+		refToBronsinsFrame = gameFrame;
+		
 		pList = new ArrayList<ModelPit> ();
 		savedPList = new ArrayList<ModelPit> ();
 		for (int i = 0; i <= 11; i ++) {
@@ -86,10 +90,14 @@ public class Model {
 				saveState(); // saves current state before moving
 				System.out.println("Correct Pit Selected");
 				moveStonesPlayerA(pitPos);
+				updateBronsinModel();
 
 			}
 			else if (!playerAsTurn() && pitPos > 5) {
+				saveState();
 				System.out.println("Correct Pit Selected");
+				moveStonesPlayerB(pitPos);
+				updateBronsinModel();
 			}
 			else {
 				System.out.println("Wrong Pit Selected. Please choose your own Pit.");
@@ -277,8 +285,10 @@ public class Model {
 	 * Updates Bronsin's Model
 	 */
 	public void updateBronsinModel () {
-		//TODO update all pits in Bronsin's model...
-		//referenceToBronsinsPits.dosomethig();
+		refToBronsinsFrame.updateViews();
 	}
-
+	
+	public int getStonesFromModelIndex (int index){
+		return pList.get(index).returnStones();
+	}
 }

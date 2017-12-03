@@ -36,6 +36,15 @@ public class GamePit extends JButton implements Pit{
 			this.add(add);
 		}
 	}
+	
+	@Override
+	public void setStone(int s) {
+		stones.clear();
+		for (int i = 0; i < s; i++) {
+			Stone stoneToAdd = new Stone(10, stoneColor);
+			stones.add(stoneToAdd);
+		}
+	}
 
 	@Override
 	public int clear() {

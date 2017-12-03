@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 public interface Pit{
 	void addStone(int s);
+	void setStone(int s);
 	int clear();
 	ArrayList<Stone> getStones();
 }

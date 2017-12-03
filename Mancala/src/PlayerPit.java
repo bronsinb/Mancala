@@ -36,6 +36,11 @@ public class PlayerPit extends JButton implements Pit{
 	}
 	
 	@Override
+	public void setStone(int s) {
+		// does nothing
+	}
+	
+	@Override
 	public int clear() {
 		// TODO Auto-generated method stub
 		int num = stones.size();

@@ -6,13 +6,15 @@ import java.awt.geom.*;
 import javax.swing.*;
 
 public class GameFrame extends JFrame{
-	private Model model = new Model(4); //Creating Model here.... Temporarily set to 4 stones....
+	private Model model;
 	
 	private GamePit[] pits;
 	private PlayerPit[] playerPits;
 	private JPanel grid;
 	
 	public GameFrame(int stoneAmount, MancalaStyle style, String a, String b) {
+		model = new Model(stoneAmount, this);  //Tai's Model
+		
 		this.setLayout(new BorderLayout());
 		pits = new GamePit[12];
 		playerPits = new PlayerPit[2];
@@ -42,29 +44,6 @@ public class GameFrame extends JFrame{
 
         int c = i; // clone of i for anonymous class
 				pits[i] = new GamePit(stoneAmount, 0, 50, style.styleStones());
-				pits[i].addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						// TODO Auto-generated method stub
-						GamePit pit = (GamePit) arg0.getSource();
-						int num = pit.clear();
-						if (num != 0) {
-							int j = -1;
-							for (int i = pit.getIndex(); i < num + pit.getIndex(); i++) {
-								if(i < 11) {
-									pits[i + 1].addStone(1);
-								}
-								else {
-									pits[j + 1].addStone(1);
-									j++;
-								}
-							}
-						}
-						repaint();
-						revalidate();
-					}
-				});
-
 				style.styleGamePits(pits[i]);
 				
 				// Add action listeners to every single pit button.
@@ -81,29 +60,6 @@ public class GameFrame extends JFrame{
 
   			int c = i; // clone of i for anonymous class
 				pits[i] = new GamePit(stoneAmount, 0, 50, style.styleStones());
-				pits[i].addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						// TODO Auto-generated method stub
-						GamePit pit = (GamePit) arg0.getSource();
-						int num = pit.clear();
-						if (num != 0) {
-							int j = -1;
-							for (int i = pit.getIndex(); i < num + pit.getIndex(); i++) {
-								if(i < 11) {
-									pits[i + 1].addStone(1);
-								}
-								else {
-									pits[j + 1].addStone(1);
-									j++;
-								}
-							}
-						}
-						repaint();
-						revalidate();
-					}
-				});
-
 				style.styleGamePits(pits[i]);
 				
 				// Add action listeners to every single pit button again for part B.
@@ -187,5 +143,12 @@ public class GameFrame extends JFrame{
 		this.add(bottom, BorderLayout.PAGE_END);
 		
 		this.setResizable(false);
+	}
+	
+	public void updateViews() {
+		for (int i = 0; i < 11; i++) {
+			pits[i].setStone(model.getStonesFromModelIndex(i));
+			repaint();
+		}
 	}
 }
