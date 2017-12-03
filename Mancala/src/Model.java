@@ -16,6 +16,7 @@ public class Model {
 	private ModelPit aPitGoal;
 	private ModelPit bPitGoal;
 	private int currentPos;
+	private int nextPosAfterCurrentPos;
 	
 	private GameFrame refToBronsinsFrame;
 	
@@ -165,12 +166,15 @@ public class Model {
 			 * End Test Code
 			 */
 
-			int nextPosAfterCurrentPos = currentPos + 1;
+			nextPosAfterCurrentPos = currentPos + 1;
 			System.out.println("CurrentPositionToAdd1Stone is: " + currentPos);
 			// Capture Condition... LAST STONE... Next pit is still on your side.... AND IT's EMPTY
-			if (stonesInHand == 1 && nextPosAfterCurrentPos <= 5 && pList.get(currentPos).isEmpty()) { 
+			if (stonesInHand == 1 && nextPosAfterCurrentPos <= 5 && pList.get(nextPosAfterCurrentPos).isEmpty()) { 
 					// TODO perform capture method here....
+					capture(nextPosAfterCurrentPos);
+					
 					System.out.println("Capture Condition Occured!");
+					
 					stonesInHand--;
 			} 
 			else { // else continue on and don't capture
@@ -246,10 +250,10 @@ public class Model {
 			 * End Test Code
 			 */
 
-			int nextPosAfterCurrentPos = currentPos + 1;
+			nextPosAfterCurrentPos = currentPos + 1;
 			System.out.println("CurrentPositionToAdd1Stone is: " + currentPos);
 			// Capture Condition... LAST STONE... Next pit is still on your side.... AND IT's EMPTY
-			if (stonesInHand == 1 && nextPosAfterCurrentPos <= 5 && pList.get(currentPos).isEmpty()) { 
+			if (stonesInHand == 1 && nextPosAfterCurrentPos <= 5 && pList.get(nextPosAfterCurrentPos).isEmpty()) { 
 					// TODO perform capture method here....
 					System.out.println("Capture Condition Occured!");
 					stonesInHand--;
@@ -325,6 +329,38 @@ public class Model {
 		}
 	}
 	
+	/**
+	 * This function returns the pit to capture given the current pit
+	 * @param capturer
+	 * @return indexToCapture
+	 */
+	public int getIndexToCapture(int capturer) { 
+		switch (capturer) {
+		case 0: return 11;
+		case 1: return 10;
+		case 2: return 9;
+		case 3: return 8;
+		case 4: return 7;
+		case 5: return 6;
+		case 6: return 5;
+		case 7:	return 4;
+		case 8:	return 3;
+		case 9: return 2;
+		case 10: return 1;
+		case 11: return 0;
+		default: return 9999;
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void capture(int capturingPit) {
+		int enemyPit = getIndexToCapture(capturingPit);
+		int stonesInEnemyPit = pList.get(enemyPit).returnStones();
+		pList.get(enemyPit).emptyPit();
+		pList.get(capturingPit).addStone(stonesInEnemyPit);
+	}
 	/**
 	 * Updates Bronsin's Model
 	 */
