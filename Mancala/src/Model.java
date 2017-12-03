@@ -6,11 +6,14 @@ import java.util.ArrayList;
 public class Model {
 	private boolean playerATurn;
 	private boolean firstTurnCompleted = false;
+	private boolean freeTurn = false;
 	private ArrayList<ModelPit> pList;
 	private int[] stateA;
 	private int[] stateB;
+	private int[] stateFree;
 	private int[] goalStatesA;
 	private int[] goalStatesB;
+	private int[] goalStatesFree;
 	
 	private ModelPit aPitGoal;
 	private ModelPit bPitGoal;
@@ -34,8 +37,10 @@ public class Model {
 		pList = new ArrayList<ModelPit> ();
 		stateA = new int[12];
 		stateB = new int[12];
+		stateFree = new int[12];
 		goalStatesA = new int[2];
 		goalStatesB = new int[2];
+		goalStatesFree = new int[2];
 		
 		for (int i = 0; i <= 11; i ++) {
 			pList.add(new ModelPit(startingStones)); //Each Pit will be initialized with 3 or 4 stones and
@@ -63,6 +68,13 @@ public class Model {
 		goalStatesB[0] = aPitGoal.returnStones();
 		goalStatesB[1] = bPitGoal.returnStones();
 	}
+	public void saveStateFree() {
+		for (int i = 0; i < pList.size(); i++) {
+			stateFree[i] = pList.get(i).returnStones();
+		}
+		goalStatesFree[0] = aPitGoal.returnStones();
+		goalStatesFree[1] = bPitGoal.returnStones();
+	}
 	
 	/**
 	 * If the undo button is pressed this is called.
@@ -70,6 +82,15 @@ public class Model {
 	public void undo() {
 		if (!firstTurnCompleted) {
 			//UNDO DO NOTHING UNTIL FIRST TURN COMPLETE
+		}
+		else if (freeTurn) {
+			for (int i = 0; i < pList.size(); i++) {
+				pList.get(i).setStones(stateFree[i]);
+			}			
+			aPitGoal.setStones(goalStatesFree[0]);
+			bPitGoal.setStones(goalStatesFree[1]);
+			freeTurn = false;
+			updateBronsinModel();
 		}
 		else {
 			if(!playerATurn) {
@@ -195,6 +216,8 @@ public class Model {
 					
 					if (stonesInHand == 0 ) { //if we have no stones left after placing a stone in our own goal... free turn for us
 						System.out.println("Free turn Player A. Go Again...");
+						saveStateFree();
+						freeTurn = true;
 						changePlayerTurns(); // gets negated at the exit of the while loop therefore still player A's turn
 						break;
 					}
@@ -226,7 +249,6 @@ public class Model {
 	
 	/**
 	 * Gets number of stones in current pit and empties it.
-	 * 
 	 * Move stones according to player B's POV.
 	 */
 	
@@ -262,6 +284,8 @@ public class Model {
 					
 					if (stonesInHand == 0 ) { //if we have no stones left after placing a stone in our own goal... free turn for us
 						System.out.println("Free turn for Player B Again...");
+						saveStateFree();
+						freeTurn = true;
 						changePlayerTurns(); // gets negated at the exit of the while loop therefore still player A's turn
 						break;
 					}
