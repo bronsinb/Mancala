@@ -149,6 +149,8 @@ public class Model {
 		int stonesInHand = pList.get(currentPos).returnStones();
 		pList.get(currentPos).emptyPit(); //Pick up stones in hand... So pit is empty...
 		
+		System.out.println("Stones Left In My Hand: " + stonesInHand);
+		
 		while (stonesInHand != 0) { // While we still have stones in our hand...
 			int nextPosAfterCurrent = currentPos++;
 			

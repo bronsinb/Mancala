@@ -24,11 +24,11 @@ public class GameFrame extends JFrame{
 		setSize(1000, 400);
 		
 		playerPits[1] = new PlayerPit(a, style.styleStones());
-		playerPits[1].setText("B");
+		playerPits[1].setText("A");
 		style.stylePlayerPits(playerPits[1]);
 		style.styleText(playerPits[1]);
 		playerPits[0] = new PlayerPit(b, style.styleStones());
-		playerPits[0].setText("A");
+		playerPits[0].setText("B");
 		style.stylePlayerPits(playerPits[0]);
 		style.styleText(playerPits[0]);
 		
@@ -134,9 +134,9 @@ public class GameFrame extends JFrame{
 			
 		}
 		playerPits[0].clear();
-		playerPits[0].addStone(model.getStonesForPlayerA());
+		playerPits[0].addStone(model.getStonesForPlayerB());
 		playerPits[1].clear();
-		playerPits[1].addStone(model.getStonesForPlayerB());
+		playerPits[1].addStone(model.getStonesForPlayerA());
 		
 		repaint();
 		revalidate();
