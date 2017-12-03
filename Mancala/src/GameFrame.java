@@ -43,7 +43,7 @@ public class GameFrame extends JFrame{
 			int c = i; // clone of i for anonymous class
 			pits[i] = new GamePit(stoneAmount, 0, 50, style.styleStones());
 			style.styleGamePits(pits[i]);
-				
+			
 			// Add action listeners to every single pit button.
 			pits[i].addActionListener(new ActionListener() {
 				@Override
@@ -127,9 +127,15 @@ public class GameFrame extends JFrame{
 	}
 	
 	public void updateViews() {
-		for (int i = 0; i < 11; i++) {
+		for (int i = 0; i < pits.length; i++) {
+			pits[i].clear();
 			pits[i].addStone(model.getStonesFromModelIndex(i));
 		}
+		playerPits[0].clear();
+		playerPits[0].addStone(model.getStonesForPlayerA());
+		playerPits[1].clear();
+		playerPits[1].addStone(model.getStonesForPlayerB());
+		
 		repaint();
 		revalidate();
 	}

@@ -298,6 +298,14 @@ public class Model {
 	}
 	
 	public int getStonesFromModelIndex (int index){
-		return pList.get(index).returnStones();
+		int stonesInIndex = pList.get(index).returnStones();
+		System.out.println("Index#:" + index + " Stones In It = " + stonesInIndex);
+		return stonesInIndex;
+	}
+	public int getStonesForPlayerA() {
+		return aPitGoal.returnStones();
+	}
+	public int getStonesForPlayerB() {
+		return bPitGoal.returnStones();
 	}
 }
