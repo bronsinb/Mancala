@@ -242,9 +242,9 @@ public class Model {
 
 			System.out.println("CurrentPositionToAdd1Stone is: " + currentPos);
 			// Capture Condition... LAST STONE... Next pit is still on your side.... AND IT's EMPTY
-			if (stonesInHand == 1 && currentPos <= 5 && pList.get(currentPos).isEmpty()) { 
+			if (stonesInHand == 1 && currentPos > 5 && pList.get(currentPos).isEmpty()) { 
 					// TODO perform capture method here....
-					System.out.println("Capture Condition Occured!");
+					System.out.println("Capture Condition is MET!");
 					capture(currentPos);
 					stonesInHand--;
 			} 
@@ -256,8 +256,8 @@ public class Model {
 					stonesInHand--; //now we have 1 less stone in our hand
 					System.out.println("Remaining Stones In Hand: " + stonesInHand);
 				}
-				else { // AKA Case (currentPos == 6)... We have advanced passed our own goal...
-					System.out.println("SCORE B GOAL!!!" + currentPos);
+				else { // AKA Case (currentPos == 0)... We have advanced passed our own goal...
+					System.out.println("SCORE A GOAL!!!" + currentPos);
 					bPitGoal.addStone(1); //since we have advanced pass our goal we should put a stone in our goal
 					stonesInHand--;
 					System.out.println("Remaining Stones In Hand: " + stonesInHand);
@@ -343,7 +343,7 @@ public class Model {
 	}
 	
 	/**
-	 * 
+	 * This function contains the logic for stealing stones from the enemy pit.
 	 */
 	public void capture(int capturingPit) {
 		int enemyPit = getIndexToCapture(capturingPit);
