@@ -56,15 +56,7 @@ public class Model {
 	 */
 	public void undo() {
 		pList = savedPList;
-		updateBronsinsModel();
-	}
-
-	
-	/**
-	 * When called updates all views based on the data structure ArrayList<ModelPit> pList
-	 */
-	public void updateBronsinsModel() {
-		
+		updateBronsinModel();
 	}
 	
 	/**
@@ -166,14 +158,12 @@ public class Model {
 			 * End Test Code
 			 */
 
-			nextPosAfterCurrentPos = currentPos + 1;
 			System.out.println("CurrentPositionToAdd1Stone is: " + currentPos);
 			// Capture Condition... LAST STONE... Next pit is still on your side.... AND IT's EMPTY
-			if (stonesInHand == 1 && nextPosAfterCurrentPos <= 5 && pList.get(nextPosAfterCurrentPos).isEmpty()) { 
+			if (stonesInHand == 1 && currentPos <= 5 && pList.get(currentPos).isEmpty()) { 
 					// TODO perform capture method here....
-					capture(nextPosAfterCurrentPos);
-					
-					System.out.println("Capture Condition Occured!");
+					System.out.println("Capture Condition is MET!");
+					capture(currentPos);
 					
 					stonesInHand--;
 			} 
@@ -250,12 +240,12 @@ public class Model {
 			 * End Test Code
 			 */
 
-			nextPosAfterCurrentPos = currentPos + 1;
 			System.out.println("CurrentPositionToAdd1Stone is: " + currentPos);
 			// Capture Condition... LAST STONE... Next pit is still on your side.... AND IT's EMPTY
-			if (stonesInHand == 1 && nextPosAfterCurrentPos <= 5 && pList.get(nextPosAfterCurrentPos).isEmpty()) { 
+			if (stonesInHand == 1 && currentPos <= 5 && pList.get(currentPos).isEmpty()) { 
 					// TODO perform capture method here....
 					System.out.println("Capture Condition Occured!");
+					capture(currentPos);
 					stonesInHand--;
 			} 
 			else { // else continue on and don't capture
@@ -359,7 +349,8 @@ public class Model {
 		int enemyPit = getIndexToCapture(capturingPit);
 		int stonesInEnemyPit = pList.get(enemyPit).returnStones();
 		pList.get(enemyPit).emptyPit();
-		pList.get(capturingPit).addStone(stonesInEnemyPit);
+		pList.get(capturingPit).addStone(1); // our single capturing stone
+		pList.get(capturingPit).addStone(stonesInEnemyPit); //Steal stones
 	}
 	/**
 	 * Updates Bronsin's Model
@@ -367,7 +358,6 @@ public class Model {
 	public void updateBronsinModel () {
 		refToBronsinsFrame.updateViews();
 	}
-	
 	public int getStonesFromModelIndex (int index){
 		int stonesInIndex = pList.get(index).returnStones();
 		//System.out.println("Index#:" + index + " Stones In It = " + stonesInIndex);
