@@ -8,8 +8,12 @@ import javax.swing.event.ChangeListener;
 
 public class Model {
 	private boolean playerATurn;
+	private boolean firstTurnCompleted = false;
 	private ArrayList<ModelPit> pList;
-	private ArrayList<ModelPit> savedPList;
+	private int[] stateA;
+	private int[] stateB;
+	private int[] goalStatesA;
+	private int[] goalStatesB;
 	
 	private ModelPit aPitGoal;
 	private ModelPit bPitGoal;
@@ -31,7 +35,11 @@ public class Model {
 		refToBronsinsFrame = gameFrame;
 		
 		pList = new ArrayList<ModelPit> ();
-		savedPList = new ArrayList<ModelPit> ();
+		stateA = new int[12];
+		stateB = new int[12];
+		goalStatesA = new int[2];
+		goalStatesB = new int[2];
+		
 		for (int i = 0; i <= 11; i ++) {
 			pList.add(new ModelPit(startingStones)); //Each Pit will be initialized with 3 or 4 stones and
 			//added to an arrayList of Pits
@@ -44,16 +52,50 @@ public class Model {
 	/**
 	 * This saveState should be called at the start of the player's turn. Always save state b4 making a move.
 	 */
-	public void saveState() {
-		savedPList = pList;
+	public void saveStateA() {
+		for (int i = 0; i < pList.size(); i++) {
+			stateA[i] = pList.get(i).returnStones();
+		}
+		goalStatesA[0] = aPitGoal.returnStones();
+		goalStatesA[1] = bPitGoal.returnStones();
+	}
+	public void saveStateB() {
+		for (int i = 0; i < pList.size(); i++) {
+			stateB[i] = pList.get(i).returnStones();
+		}
+		goalStatesB[0] = aPitGoal.returnStones();
+		goalStatesB[1] = bPitGoal.returnStones();
 	}
 	
 	/**
 	 * If the undo button is pressed this is called.
 	 */
 	public void undo() {
-		pList = savedPList;
-		updateBronsinModel();
+		if (!firstTurnCompleted) {
+			//UNDO DO NOTHING UNTIL FIRST TURN COMPLETE
+		}
+		else {
+			if(!playerATurn) {
+				changePlayerTurns();
+				for (int i = 0; i < pList.size(); i++) {
+					pList.get(i).setStones(stateA[i]);
+				}			
+				aPitGoal.setStones(goalStatesA[0]);
+				bPitGoal.setStones(goalStatesA[1]);
+				updateBronsinModel();
+			}
+			else {
+				changePlayerTurns();
+				System.out.println("Else undo B!");
+				changePlayerTurns();
+				for (int i = 0; i < pList.size(); i++) {
+					pList.get(i).setStones(stateB[i]);
+				}			
+				aPitGoal.setStones(goalStatesB[0]);
+				bPitGoal.setStones(goalStatesB[1]);
+				updateBronsinModel();
+			}
+		}
 	}
 	
 	/**
@@ -70,12 +112,13 @@ public class Model {
 		}
 		else { //Then check if the pit belongs to the player... 
 			if (playerAsTurn() && pitPos <= 5) {
-				saveState(); // saves current state before moving
+				saveStateA(); // saves current state before moving
 				moveStonesPlayerA(pitPos);
 				updateBronsinModel();
+				firstTurnCompleted = true;
 			}
 			else if (!playerAsTurn() && pitPos > 5) {
-				saveState();
+				saveStateB();
 				moveStonesPlayerB(pitPos);
 				updateBronsinModel();
 			}
