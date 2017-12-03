@@ -11,6 +11,8 @@ public class Model {
 	private int[] stateB;
 	private int[] goalStatesA;
 	private int[] goalStatesB;
+	private int undoNumA = 0;
+	private int undoNumB = 0;
 	
 	private ModelPit aPitGoal;
 	private ModelPit bPitGoal;
@@ -73,23 +75,34 @@ public class Model {
 		}
 		else {
 			if(!playerATurn) {
-				changePlayerTurns();
-				for (int i = 0; i < pList.size(); i++) {
-					pList.get(i).setStones(stateA[i]);
-				}			
-				aPitGoal.setStones(goalStatesA[0]);
-				bPitGoal.setStones(goalStatesA[1]);
-				updateBronsinModel();
+				if (undoNumA >= 2) {
+					System.out.println("No more undos for Player A!");
+				}
+				else {
+					changePlayerTurns();
+					for (int i = 0; i < pList.size(); i++) {
+						pList.get(i).setStones(stateA[i]);
+					}			
+					aPitGoal.setStones(goalStatesA[0]);
+					bPitGoal.setStones(goalStatesA[1]);
+					undoNumA++;
+					updateBronsinModel();
+				}
 			}
 			else {
-				changePlayerTurns();
-				System.out.println("Else undo B!");
-				for (int i = 0; i < pList.size(); i++) {
-					pList.get(i).setStones(stateB[i]);
-				}			
-				aPitGoal.setStones(goalStatesB[0]);
-				bPitGoal.setStones(goalStatesB[1]);
-				updateBronsinModel();
+				if (undoNumB >= 2) {
+					System.out.println("No more undos for Player B!");
+				}
+				else {
+					changePlayerTurns();
+					for (int i = 0; i < pList.size(); i++) {
+						pList.get(i).setStones(stateB[i]);
+					}			
+					aPitGoal.setStones(goalStatesB[0]);
+					bPitGoal.setStones(goalStatesB[1]);
+					undoNumB++;
+					updateBronsinModel();	
+				}
 			}
 		}
 	}
