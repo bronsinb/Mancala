@@ -48,19 +48,18 @@ public class Model {
 	 * This saveState should be called at the start of the player's turn. Always save state b4 making a move.
 	 */
 	public void saveStateA() {
-		for (int i = 0; i < 11; i++) {
-			stateA.clear();
-			ModelPit pit = new ModelPit();
+		stateA.clear();
+		for (int i = 0; i < pList.size(); i++) {
+			System.out.println("RETURNING SIZE Plist: " + pList.size());
 			stateA.add(pList.get(i));
-			System.out.println("RETURNING SIZE: " + stateA.size());
+			System.out.println("RETURNING SIZE A: " + stateA.size());
 			//System.out.println("RETURNING STONES: " + stateA.get(i).returnStones());
 		}
 	}
 	public void saveStateB() {
-		for (int i = 0; i < 11; i++) {
-			stateB.clear();
-			stateB.add(pList.get(i)); 
-			//System.out.println("RETURNING STONES: " + stateB.get(i).returnStones());
+		stateB.clear();
+		for (int i = 0; i < pList.size(); i++) {
+			stateB.add(pList.get(i));
 		}
 	}
 	
@@ -74,20 +73,22 @@ public class Model {
 		}
 		else {
 			System.out.println("Else undo!");
+			pList.clear();
+			System.out.println("RETURNING SIZE Plist: " + pList.size());
 			if(!playerATurn) {
 				System.out.println("Else undo A!");
-				for (int i = 0; i < 11; i++) {
-					pList.clear();
+				for (int i = 0; i < stateA.size(); i++) {
 					pList.add(stateA.get(i)); 
+					System.out.println("RETURNING SIZE Plist: " + pList.size());
 					//System.out.println("Number of Stones for[" + i + "]" + pList.get(i).returnStones());
 				}			
 				updateBronsinModel();
 			}
 			else {
 				System.out.println("Else undo B!");
-				for (int i = 0; i < 11; i++) {
-					pList.clear();
+				for (int i = 0; i < stateB.size(); i++) {
 					pList.add(stateB.get(i)); 
+					System.out.println("RETURNING SIZE Plist: " + pList.size());
 					//System.out.println("Number of Stones for[" + i + "]" + pList.get(i).returnStones());
 				}
 				updateBronsinModel();
