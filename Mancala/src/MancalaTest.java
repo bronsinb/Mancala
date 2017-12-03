@@ -29,7 +29,7 @@ public class MancalaTest {
 		JTextField stonesInput = new JTextField();
 		gameInfo.add(stones);
 		gameInfo.add(stonesInput);
-		/*
+		
 	    JButton colorButton = new JButton("Wood");
 	    colorButton.addActionListener(new ActionListener() {
 
@@ -68,23 +68,23 @@ public class MancalaTest {
 	    	
 	    });
 	    
-	    */
-		
+	    
+	
 		/**
 		 * Tai Tester 3 is initial stones
 		 */
-		GameFrame comp = new GameFrame(3, new ColoredStyle(), playerNameInput.getText(), playerNameTwoInput.getText());
-		start.dispose();
-		comp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		comp.setVisible(true);
+		//GameFrame comp = new GameFrame(3, new ColoredStyle(), playerNameInput.getText(), playerNameTwoInput.getText());
+		//start.dispose();
+		//comp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		//comp.setVisible(true);
 		/**
 		 * end Tai Tester
 		 */
 	    
 	    JPanel styleStart = new JPanel();
 	    styleStart.setLayout(new GridLayout(0, 2));
-	    //styleStart.add(colorButton);
-	    //styleStart.add(bwButton);
+	    styleStart.add(colorButton);
+	    styleStart.add(bwButton);
 	    
 	    gameInfo.add(styleStart);
 	    
@@ -93,6 +93,6 @@ public class MancalaTest {
 		
 		start.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		start.pack();
-		//start.setVisible(true);
+		start.setVisible(true);
 	}
 }
