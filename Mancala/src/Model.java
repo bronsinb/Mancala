@@ -159,7 +159,11 @@ public class Model {
 			else { // else continue on and don't capture
 		
 				currentPos++; //move to next pit
-				if (currentPos == 12) {currentPos = 0;} // wrap around // reset position
+				System.out.println("DEBUG: CurrentPos: " + currentPos);
+				if (currentPos == 13) {
+					currentPos = 0;
+					} // wrap around // reset position
+				System.out.println("DEBUG: CurrentPosReset: " + currentPos);
 				
 				if (currentPos != 6) { //if current position has not already advanced past own goal
 					pList.get(currentPos).addStone(1); // continue adding 1 stone to that pit
@@ -216,7 +220,12 @@ public class Model {
 			else { // else continue on and don't capture
 		
 				currentPos++; //move to next pit
-				if (currentPos == 12) {currentPos = 0;} // wrap around // reset position
+				System.out.println("DEBUG: CurrentPos: " + currentPos);
+				if (currentPos <= 12) {
+					currentPos = 0;
+					System.out.println("DEBUG: CurrentPosInBetween: " + currentPos);
+					} // wrap around // reset position
+				System.out.println("DEBUG: CurrentPosReset: " + currentPos);
 				
 				if (currentPos != 0) { //if current position has not already advanced past own goal
 					pList.get(currentPos).addStone(1); // continue adding 1 stone to that pit

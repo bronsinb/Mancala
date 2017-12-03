@@ -40,37 +40,18 @@ public class GameFrame extends JFrame{
 		}
 	
 		for(int i = 0; i < pits.length; i++) {
-			if(i < 6) {
-
-        int c = i; // clone of i for anonymous class
-				pits[i] = new GamePit(stoneAmount, 0, 50, style.styleStones());
-				style.styleGamePits(pits[i]);
+			int c = i; // clone of i for anonymous class
+			pits[i] = new GamePit(stoneAmount, 0, 50, style.styleStones());
+			style.styleGamePits(pits[i]);
 				
-				// Add action listeners to every single pit button.
-				pits[i].addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
-						model.checkCorrectPitSelected(c);
-					}
-				});
-				
-			}
-			else {
-
-  			int c = i; // clone of i for anonymous class
-				pits[i] = new GamePit(stoneAmount, 0, 50, style.styleStones());
-				style.styleGamePits(pits[i]);
-				
-				// Add action listeners to every single pit button again for part B.
-				pits[i].addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
-						model.checkCorrectPitSelected(c);
-					}
-				});
-			}
+			// Add action listeners to every single pit button.
+			pits[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					model.checkCorrectPitSelected(c);
+				}
+			});
 		}
 		
 		int index = 11;
@@ -147,8 +128,9 @@ public class GameFrame extends JFrame{
 	
 	public void updateViews() {
 		for (int i = 0; i < 11; i++) {
-			pits[i].setStone(model.getStonesFromModelIndex(i));
-			repaint();
+			pits[i].addStone(model.getStonesFromModelIndex(i));
 		}
+		repaint();
+		revalidate();
 	}
 }
