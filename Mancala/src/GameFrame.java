@@ -48,8 +48,6 @@ public class GameFrame extends JFrame{
 			pits[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					System.out.println("Index Selected On View is " + c + ".");
 					model.checkCorrectPitSelected(c);
 				}
 			});
@@ -139,10 +137,6 @@ public class GameFrame extends JFrame{
 		playerPits[0].addStone(model.getStonesForPlayerB());
 		playerPits[1].clear();
 		playerPits[1].addStone(model.getStonesForPlayerA());
-		
-		System.out.println("Player A's goal score is now: " + model.getStonesForPlayerA());
-		System.out.println("Player B's goal score is now: " + model.getStonesForPlayerB());
-		
 		repaint();
 		revalidate();
 	}
