@@ -28,10 +28,9 @@ public class PlayerPit extends JButton implements Pit{
 	public void addStone(int s) {
 		// TODO Auto-generated method stub
 		for(int i = 0; i < s; i++) {
-			stones.add(new Stone(10, stoneColor));
-		}
-		for(Stone i: stones) {
-			this.add(i);
+			Stone add = new Stone(10, stoneColor);
+			stones.add(add);
+			this.add(add);
 		}
 	}
 	
@@ -40,6 +39,7 @@ public class PlayerPit extends JButton implements Pit{
 		// TODO Auto-generated method stub
 		int num = stones.size();
 		stones.clear();
+		this.removeAll();
 		return num;
 	}
 

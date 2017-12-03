@@ -182,7 +182,7 @@ public class Model {
 					System.out.println("Remaining Stones In Hand: " + stonesInHand);
 				}
 				else { // AKA Case (currentPos == 6)... We have advanced passed our own goal...
-					System.out.println("CurrentPositionToAdd1ToGoalIs " + currentPos);
+					System.out.println("SCORE A GOAL!!!" + currentPos);
 					aPitGoal.addStone(1); //since we have advanced pass our goal we should put a stone in our goal
 					stonesInHand--;
 					System.out.println("Remaining Stones In Hand: " + stonesInHand);

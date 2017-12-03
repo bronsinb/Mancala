@@ -138,6 +138,9 @@ public class GameFrame extends JFrame{
 		playerPits[1].clear();
 		playerPits[1].addStone(model.getStonesForPlayerA());
 		
+		System.out.println("Player A's goal score is now: " + model.getStonesForPlayerA());
+		System.out.println("Player B's goal score is now: " + model.getStonesForPlayerB());
+		
 		repaint();
 		revalidate();
 	}
