@@ -223,7 +223,12 @@ public class Model {
 		currentPos = pitPos;
 		int stonesInHand = pList.get(currentPos).returnStones();
 		pList.get(currentPos).emptyPit(); //Pick up stones in hand... So pit is empty...
+		
+		System.out.println("The current pos is: " + currentPos);
+		System.out.println("Stones Left In My Hand: " + stonesInHand);
+		
 		while (stonesInHand != 0) { // While we still have stones in our hand...
+			
 			currentPos++; //move to next pit
 			////System.out.println("DEBUG: CurrentPos: " + currentPos);
 			if (currentPos >= 12) {
@@ -242,38 +247,37 @@ public class Model {
 			 */
 
 			int nextPosAfterCurrentPos = currentPos + 1;
-			
+			System.out.println("CurrentPositionToAdd1Stone is: " + currentPos);
 			// Capture Condition... LAST STONE... Next pit is still on your side.... AND IT's EMPTY
-			if (stonesInHand == 1 && nextPosAfterCurrentPos > 5 && (nextPosAfterCurrentPos != 12) && pList.get(currentPos).isEmpty()) { 
+			if (stonesInHand == 1 && nextPosAfterCurrentPos <= 5 && pList.get(currentPos).isEmpty()) { 
 					// TODO perform capture method here....
+					System.out.println("Capture Condition Occured!");
 					stonesInHand--;
 			} 
 			else { // else continue on and don't capture
-		
-				currentPos++; //move to next pit
-				System.out.println("DEBUG: CurrentPos: " + currentPos);
-				if (currentPos <= 12) {
-					currentPos = 0;
-					System.out.println("DEBUG: CurrentPosInBetween: " + currentPos);
-					} // wrap around // reset position
-				System.out.println("DEBUG: CurrentPosReset: " + currentPos);
-				
+
 				if (currentPos != 0) { //if current position has not already advanced past own goal
-					pList.get(currentPos).addStone(1); // continue adding 1 stone to that pit
+					System.out.println("CurrentPositionToAdd1Stone is: " + currentPos);
+					pList.get(currentPos).addStone(1); // continue  by adding 1 stone to that pit
 					stonesInHand--; //now we have 1 less stone in our hand
+					System.out.println("Remaining Stones In Hand: " + stonesInHand);
 				}
-				else { // AKA Case (currentPos == 0)... We have advanced pass our own goal...
+				else { // AKA Case (currentPos == 6)... We have advanced passed our own goal...
+					System.out.println("SCORE B GOAL!!!" + currentPos);
 					bPitGoal.addStone(1); //since we have advanced pass our goal we should put a stone in our goal
 					stonesInHand--;
+					System.out.println("Remaining Stones In Hand: " + stonesInHand);
+					
 					if (stonesInHand == 0 ) { //if we have no stones left after placing a stone in our own goal... free turn for us
 						//TODO Perform Free Turn Method Here.
 							System.out.println("Free turn for Player B Again...");
-							changePlayerTurns(); // gets negated at the exit of the while loop therefore still player B's turn
+							changePlayerTurns(); // gets negated at the exit of the while loop therefore still player A's turn
 						break;
 					}
 					else { // else continue on adding stones to pits until stones in hand is empty
 						pList.get(currentPos).addStone(1);
 						stonesInHand--;
+						System.out.println("Remaining Stones In Hand: " + stonesInHand);
 					}
 				}
 				
