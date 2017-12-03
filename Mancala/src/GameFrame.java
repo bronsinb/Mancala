@@ -107,6 +107,12 @@ public class GameFrame extends JFrame{
 		style.styleButtons(undo);
 		style.styleText(undo);
 		undo.setText("UNDO");
+		undo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.undo();
+			}
+		});
 
 		JButton next = new JButton();		
 		style.styleButtons(next);

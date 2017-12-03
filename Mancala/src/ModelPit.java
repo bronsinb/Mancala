@@ -21,6 +21,15 @@ public class ModelPit {
 	}
 	
 	/**
+	 * Method to set # of stones in pit
+	 * 
+	 * @param s ; stones to add
+	 */
+	public void setStones(int s) {
+		stones = s;
+	}
+	
+	/**
 	 * This function... returns...
 	 * 
 	 * @return number of stones currently in pit
@@ -48,8 +57,5 @@ public class ModelPit {
 		else {
 			return false;
 		}
-	}
-	public void updateBronsinsModel() {
-		
 	}
 }
