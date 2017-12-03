@@ -88,14 +88,14 @@ public class Model {
 		else { //Then check if the pit belongs to the player... 
 			if (playerAsTurn() && pitPos <= 5) {
 				saveState(); // saves current state before moving
-				System.out.println("Correct Pit Selected");
+				System.out.println("Correct Pit Selected A");
 				moveStonesPlayerA(pitPos);
 				updateBronsinModel();
 
 			}
 			else if (!playerAsTurn() && pitPos > 5) {
 				saveState();
-				System.out.println("Correct Pit Selected");
+				System.out.println("Correct Pit Selected B");
 				moveStonesPlayerB(pitPos);
 				updateBronsinModel();
 			}
@@ -146,7 +146,8 @@ public class Model {
 	 */
 	public void moveStonesPlayerA(int pitPos) {
 		int currentPos = pitPos;
-		int stonesInHand = pList.get(currentPos).emptyPit(); //Pick up stones in hand... So pit is empty...
+		int stonesInHand = pList.get(currentPos).returnStones();
+		pList.get(currentPos).emptyPit(); //Pick up stones in hand... So pit is empty...
 		
 		while (stonesInHand != 0) { // While we still have stones in our hand...
 			int nextPosAfterCurrent = currentPos++;
@@ -207,8 +208,8 @@ public class Model {
 	
 	public void moveStonesPlayerB(int pitPos) {
 		int currentPos = pitPos;
-		int stonesInHand = pList.get(currentPos).emptyPit(); //Pick up stones in hand... So pit is empty...
-		
+		int stonesInHand = pList.get(currentPos).returnStones();
+		pList.get(currentPos).emptyPit(); //Pick up stones in hand... So pit is empty...
 		while (stonesInHand != 0) { // While we still have stones in our hand...
 			int nextPosAfterCurrent = currentPos++;
 			
@@ -232,7 +233,7 @@ public class Model {
 					stonesInHand--; //now we have 1 less stone in our hand
 				}
 				else { // AKA Case (currentPos == 0)... We have advanced pass our own goal...
-					aPitGoal.addStone(1); //since we have advanced pass our goal we should put a stone in our goal
+					bPitGoal.addStone(1); //since we have advanced pass our goal we should put a stone in our goal
 					stonesInHand--;
 					if (stonesInHand == 0 ) { //if we have no stones left after placing a stone in our own goal... free turn for us
 						//TODO Perform Free Turn Method Here.

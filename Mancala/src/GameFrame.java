@@ -49,6 +49,7 @@ public class GameFrame extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
+					System.out.println("Index Selected On View is " + c + ".");
 					model.checkCorrectPitSelected(c);
 				}
 			});
@@ -130,6 +131,7 @@ public class GameFrame extends JFrame{
 		for (int i = 0; i < pits.length; i++) {
 			pits[i].clear();
 			pits[i].addStone(model.getStonesFromModelIndex(i));
+			
 		}
 		playerPits[0].clear();
 		playerPits[0].addStone(model.getStonesForPlayerA());
