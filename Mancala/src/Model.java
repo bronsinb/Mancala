@@ -224,10 +224,27 @@ public class Model {
 		int stonesInHand = pList.get(currentPos).returnStones();
 		pList.get(currentPos).emptyPit(); //Pick up stones in hand... So pit is empty...
 		while (stonesInHand != 0) { // While we still have stones in our hand...
-			int nextPosAfterCurrent = currentPos + 1;
+			currentPos++; //move to next pit
+			////System.out.println("DEBUG: CurrentPos: " + currentPos);
+			if (currentPos >= 12) {
+				currentPos = 0;
+				System.out.println("Wrap around condition met");
+			} // wrap around // reset position
+			////System.out.println("DEBUG: CurrentPosReset: " + currentPos);
+			
+			/**
+			 * Test Code
+			 */
+			System.out.println("The current pos is: " + currentPos);
+			System.out.println("Stones Left In My Hand: " + stonesInHand);
+			/**
+			 * End Test Code
+			 */
+
+			int nextPosAfterCurrentPos = currentPos + 1;
 			
 			// Capture Condition... LAST STONE... Next pit is still on your side.... AND IT's EMPTY
-			if (stonesInHand == 1 && nextPosAfterCurrent > 5 && (nextPosAfterCurrent != 12) && pList.get(currentPos).isEmpty()) { 
+			if (stonesInHand == 1 && nextPosAfterCurrentPos > 5 && (nextPosAfterCurrentPos != 12) && pList.get(currentPos).isEmpty()) { 
 					// TODO perform capture method here....
 					stonesInHand--;
 			} 

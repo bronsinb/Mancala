@@ -127,11 +127,13 @@ public class GameFrame extends JFrame{
 		this.setResizable(false);
 	}
 	
+	/**
+	 * Tai's update Views function. Actually updates Bronsin's model which updates the view.
+	 */
 	public void updateViews() {
 		for (int i = 0; i < pits.length; i++) {
 			pits[i].clear();
 			pits[i].addStone(model.getStonesFromModelIndex(i));
-			
 		}
 		playerPits[0].clear();
 		playerPits[0].addStone(model.getStonesForPlayerB());
