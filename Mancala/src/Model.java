@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Model {
 	private boolean playerATurn;
 	private boolean firstTurnCompleted = false;
+	private boolean undoUsed = false;
 	private ArrayList<ModelPit> pList;
 	private int[] stateA;
 	private int[] stateB;
@@ -73,6 +74,9 @@ public class Model {
 		if (!firstTurnCompleted) {
 			//UNDO DO NOTHING UNTIL FIRST TURN COMPLETE
 		}
+		else if (undoUsed == true) {
+			System.out.println("You already pressed undo! Can't undo an undo!");
+		}
 		else {
 			if(!playerATurn) {
 				if (undoNumA >= 2) {
@@ -86,6 +90,7 @@ public class Model {
 					aPitGoal.setStones(goalStatesA[0]);
 					bPitGoal.setStones(goalStatesA[1]);
 					undoNumA++;
+					undoUsed = true;
 					updateBronsinModel();
 				}
 			}
@@ -101,6 +106,7 @@ public class Model {
 					aPitGoal.setStones(goalStatesB[0]);
 					bPitGoal.setStones(goalStatesB[1]);
 					undoNumB++;
+					undoUsed = true;
 					updateBronsinModel();	
 				}
 			}
@@ -125,11 +131,13 @@ public class Model {
 				moveStonesPlayerA(pitPos);
 				updateBronsinModel();
 				firstTurnCompleted = true;
+				undoUsed = false;
 			}
 			else if (!playerAsTurn() && pitPos > 5) {
 				saveStateB();
 				moveStonesPlayerB(pitPos);
 				updateBronsinModel();
+				undoUsed = false;
 			}
 			else {
 				System.out.println("Wrong Pit Selected. Please choose your own Pit.");
