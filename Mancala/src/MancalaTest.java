@@ -1,11 +1,22 @@
+/**
+ * File containing tester
+ */
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+/**
+ * Class that tests Mancala board
+ * @author Bronsin Benyamin Pouran
+ */
 public class MancalaTest {
 	
+	/**
+	 * Main method that tests Mancala board
+	 * @param args Not Used
+	 */
 	public static void main(String[] args) {	
 		
 		JFrame start = new JFrame();

@@ -1,3 +1,6 @@
+/**
+ * File containing class of Player Pit
+ */
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.ArrayList;
@@ -14,12 +17,16 @@ public class PlayerPit extends JButton implements Pit{
 	private Color stoneColor;
 	private String player;
 	
+	/**
+	 * Constructs a Player pit object
+	 * @param player Name of player
+	 * @param stoneColor Color of stones
+	 */
 	public PlayerPit(String player, Color stoneColor) {
 		stones = new ArrayList<>();
 		this.player = player;
 		this.stoneColor = stoneColor;
 		this.setPreferredSize(new Dimension(100, 200));
-		//this.setSize(sizeW, sizeH);
 		this.setEnabled(false);
 		this.setLayout(new GridLayout(15, 5));
 	}
@@ -58,6 +65,10 @@ public class PlayerPit extends JButton implements Pit{
 		return stones;
 	}
 	
+	/**
+	 * Get name of player
+	 * @return player Name of player
+	 */
 	public String getName() {
 		return player;
 	}

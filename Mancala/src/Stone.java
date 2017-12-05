@@ -1,3 +1,6 @@
+/**
+ * File containing class of stone
+ */
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
@@ -11,6 +14,11 @@ public class Stone extends JComponent{
 	private Ellipse2D stone;
 	private Color color;
 	
+	/**
+	 * Constructs a stone object
+	 * @param size Size of stone
+	 * @param color Color of stone
+	 */
 	public Stone(double size, Color color) {
 		stone = new Ellipse2D.Double(0, 0, size, size);
 		this.color = color;
@@ -24,6 +32,10 @@ public class Stone extends JComponent{
 		g2.fill(stone);
 	}
 	
+	/**
+	 * Get stone shape
+	 * @return Stone shape
+	 */
 	public Ellipse2D getStone() {
 		return stone;
 	}

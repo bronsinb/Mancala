@@ -3,6 +3,10 @@
  */
 import java.util.ArrayList;
 
+/**
+ * Model of Game
+ * @author Tai Dao and Stephen Yang (Logic)
+ */
 public class Model {
 	private boolean playerATurn;
 	private boolean firstTurnCompleted = false;

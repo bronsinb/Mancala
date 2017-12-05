@@ -1,3 +1,6 @@
+/**
+ * File containing class for painting Game Board
+ */
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -5,6 +8,10 @@ import java.awt.geom.*;
 
 import javax.swing.*;
 
+/**
+ * Frame class that paints gameboard
+ * @author Bronsin Benyamin Pouran
+ */
 public class GameFrame extends JFrame{
 	private Model model;
 	
@@ -12,6 +19,13 @@ public class GameFrame extends JFrame{
 	private PlayerPit[] playerPits;
 	private JPanel grid;
 	
+	/**
+	 * Constructs Frame that paints Mancala gameboard
+	 * @param stoneAmount Amount of initial stones
+	 * @param style Style of Mancala
+	 * @param a Player A's name
+	 * @param b Player B's name
+	 */
 	public GameFrame(int stoneAmount, MancalaStyle style, String a, String b) {
 		model = new Model(stoneAmount, this);  //Tai's Model
 		
@@ -113,14 +127,8 @@ public class GameFrame extends JFrame{
 				model.undo();
 			}
 		});
-
-		JButton next = new JButton();		
-		style.styleButtons(next);
-		style.styleText(next);
-		next.setText("NEXT");
 		
 		bottom.add(undo);
-		bottom.add(next);
 		
 		this.add(top, BorderLayout.PAGE_START);
 		this.add(west, BorderLayout.LINE_START);

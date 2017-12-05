@@ -1,3 +1,7 @@
+/**
+ * Class that has model of pit
+ * @author Tai Doa
+ */
 public class ModelPit {
 
 	private int stones;

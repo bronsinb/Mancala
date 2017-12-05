@@ -1,3 +1,6 @@
+/**
+ * File containing a Strategy pattern style
+ */
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -6,6 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+/**
+ * Class that styles board into black and white
+ * @author Bronsin Benyamin Pouran
+ */
 public class ColoredStyle implements MancalaStyle{
 
 	@Override

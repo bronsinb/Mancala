@@ -1,3 +1,6 @@
+/**
+ * File containing class of game pit
+ */
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -7,7 +10,6 @@ import javax.swing.*;
 /**
  * Class that draws Game pits
  * @author Bronsin Benyamin Pouran
- *
  */
 public class GamePit extends JButton implements Pit{
 	private ArrayList<Stone> stones;
@@ -15,6 +17,13 @@ public class GamePit extends JButton implements Pit{
 	private Color stoneColor;
 	private int index;
 
+	/**
+	 * Constructs gamepit object with amount of stones
+	 * @param stoneAmount Amount of initial stones
+	 * @param index Index of pit in grid
+	 * @param size Size of the pit
+	 * @param stoneColor Color of the stones
+	 */
 	public GamePit(int stoneAmount, int index, int size, Color stoneColor) {
 		stones = new ArrayList<>();
 		this.stoneColor = stoneColor;
@@ -60,10 +69,18 @@ public class GamePit extends JButton implements Pit{
 		return stones;
 	}
 
+	/**
+	 * Gets index of pit
+	 * @return Index of pit
+	 */
 	public int getIndex() {
 		return index;
 	}
 
+	/**
+	 * Sets index of pit
+	 * @param index New index of pit
+	 */
 	public void setIndex(int index) {
 		this.index = index;
 	}

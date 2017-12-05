@@ -1,7 +1,15 @@
+/**
+ * File containing a Strategy pattern style
+ */
 import java.awt.Color;
 
 import javax.swing.*;
 
+/**
+ * Class that styles board into Black and white
+ * @author Bronsin Benyamin Pouran
+ *
+ */
 public class BlackWhiteStyle implements MancalaStyle{
 
 	@Override
