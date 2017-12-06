@@ -28,7 +28,9 @@ public class GameFrame extends JFrame{
 	 */
 	public GameFrame(int stoneAmount, MancalaStyle style, String a, String b) {
 		model = new Model(stoneAmount, this);  //Tai's Model
-		
+		JTextArea name = new JTextArea(" "+ a + "'s Turn ");
+		name.setFont(new Font("SansSerif", Font.BOLD, 17));
+		name.setEditable(false);
 		this.setLayout(new BorderLayout());
 		pits = new GamePit[12];
 		playerPits = new PlayerPit[2];
@@ -63,6 +65,12 @@ public class GameFrame extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					model.checkCorrectPitSelected(c);
+					if(model.playerAsTurn()) {
+						name.setText(" "+ a + "'s Turn ");
+					}
+					else if(!model.playerAsTurn()){
+						name.setText(" "+ b + "'s Turn ");
+					}
 				}
 			});
 		}
@@ -129,6 +137,7 @@ public class GameFrame extends JFrame{
 		});
 		
 		bottom.add(undo);
+		bottom.add(name);
 		
 		this.add(top, BorderLayout.PAGE_START);
 		this.add(west, BorderLayout.LINE_START);

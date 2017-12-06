@@ -47,7 +47,7 @@ public class MancalaTest {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				if(!(playerNameTwoInput.getText().equals("") && playerNameInput.getText().equals("") && stonesInput.getText().equals(""))){
+				if(!playerNameTwoInput.getText().equals("") && !playerNameInput.getText().equals("") && !stonesInput.getText().equals("")){
 					if("34".contains(stonesInput.getText())) {
 					GameFrame comp = new GameFrame(Integer.parseInt(stonesInput.getText()), new ColoredStyle(), playerNameInput.getText(), playerNameTwoInput.getText());
 					start.dispose();
@@ -55,6 +55,12 @@ public class MancalaTest {
 					comp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 					comp.setVisible(true);
 					}
+					else {
+						JOptionPane.showMessageDialog(null, "Stone count is not 3 or 4!");
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Either name or stone fields are empty!");
 				}
 			}
 	    	
@@ -66,7 +72,7 @@ public class MancalaTest {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				if(!(playerNameTwoInput.getText().equals("") && playerNameInput.getText().equals("") && stonesInput.getText().equals("") && "34".contains(stonesInput.getText()))){
+				if(!playerNameTwoInput.getText().equals("") && !playerNameInput.getText().equals("") && !stonesInput.getText().equals("")){
 					if("34".contains(stonesInput.getText())) {
 					GameFrame comp = new GameFrame(Integer.parseInt(stonesInput.getText()), new BlackWhiteStyle(), playerNameInput.getText(), playerNameTwoInput.getText());
 					start.dispose();
@@ -74,6 +80,12 @@ public class MancalaTest {
 					comp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 					comp.setVisible(true);
 					}
+					else {
+						JOptionPane.showMessageDialog(null, "Stone count is not 3 or 4!");
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Either name or stone fields are empty!");
 				}
 			}
 	    	
