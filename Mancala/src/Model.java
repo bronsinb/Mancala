@@ -110,7 +110,7 @@ public class Model {
 				bPitGoal.setStones(goalStatesB[1]);
 				undoNumB++;
 				undoUsed = true;
-				updateBronsinModel();	
+				updateBronsinModel();
 			}
 		}
 		else {
@@ -120,6 +120,7 @@ public class Model {
 				}
 				else {
 					changePlayerTurns();
+					updateViewTurns();
 					for (int i = 0; i < pList.size(); i++) {
 						pList.get(i).setStones(stateA[i]);
 					}			
@@ -136,6 +137,7 @@ public class Model {
 				}
 				else {
 					changePlayerTurns();
+					updateViewTurns();
 					for (int i = 0; i < pList.size(); i++) {
 						pList.get(i).setStones(stateB[i]);
 					}			
@@ -157,6 +159,7 @@ public class Model {
 	 * @param pitPos
 	 */
 	public void checkCorrectPitSelected (int pitPos) {
+		
 		//First check if the pit is empty to begin with....
 		if (checkIfSelectedPitIsEmpty(pitPos)) {
 			System.out.println("That pit is empty! Select a pit with stones on your side!");
@@ -166,6 +169,7 @@ public class Model {
 				saveStateA(); // saves current state before moving
 				moveStonesPlayerA(pitPos);
 				updateBronsinModel();
+				updateViewTurns();
 				firstTurnCompleted = true;
 				undoUsed = false;
 			}
@@ -173,6 +177,7 @@ public class Model {
 				saveStateB();
 				moveStonesPlayerB(pitPos);
 				updateBronsinModel();
+				updateViewTurns();
 				undoUsed = false;
 			}
 			else {
@@ -454,5 +459,12 @@ public class Model {
 	}
 	public int getStonesForPlayerB() {
 		return bPitGoal.returnStones();
+	}
+	
+	/**
+	 * Updates player's turn in view
+	 */
+	public void updateViewTurns() {
+		refToBronsinsFrame.updateViewTurns();
 	}
 }

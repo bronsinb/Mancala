@@ -18,6 +18,7 @@ public class GameFrame extends JFrame{
 	private GamePit[] pits;
 	private PlayerPit[] playerPits;
 	private JPanel grid;
+	private JTextArea name;
 	
 	/**
 	 * Constructs Frame that paints Mancala gameboard
@@ -28,7 +29,7 @@ public class GameFrame extends JFrame{
 	 */
 	public GameFrame(int stoneAmount, MancalaStyle style, String a, String b) {
 		model = new Model(stoneAmount, this);  //Tai's Model
-		JTextArea name = new JTextArea(" "+ a + "'s Turn ");
+		name = new JTextArea(" "+ a + "'s Turn ");
 		name.setFont(new Font("SansSerif", Font.BOLD, 17));
 		name.setEditable(false);
 		this.setLayout(new BorderLayout());
@@ -60,17 +61,12 @@ public class GameFrame extends JFrame{
 			pits[i] = new GamePit(stoneAmount, 0, 50, style.styleStones());
 			style.styleGamePits(pits[i]);
 			
-			// Add action listeners to every single pit button.
+			// Add action listeners to every single pit button. When pressed calls 
+			//model.checkCorrectedPitSelected passing the index of that pit button.
 			pits[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					model.checkCorrectPitSelected(c);
-					if(model.playerAsTurn()) {
-						name.setText(" "+ a + "'s Turn ");
-					}
-					else if(!model.playerAsTurn()){
-						name.setText(" "+ b + "'s Turn ");
-					}
 				}
 			});
 		}
@@ -162,5 +158,16 @@ public class GameFrame extends JFrame{
 		playerPits[1].addStone(model.getStonesForPlayerA());
 		repaint();
 		revalidate();
+	}
+	/**
+	 * Tai's update turns function. Updates Bronsin's name TextArea to display who's turn it is.
+	 */
+	public void updateViewTurns() {
+		if(model.playerAsTurn()) {
+			name.setText(" " + "a's Turn ");
+		}
+		else if(!model.playerAsTurn()){
+			name.setText(" " + "b's Turn ");
+		}
 	}
 }
