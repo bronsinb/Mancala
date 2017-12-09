@@ -401,6 +401,8 @@ public class Model {
 		for (int i = 6; i <=11 ; i++) {
 			bPitGoal.addStone(pList.get(i).returnStones());
 		}
+		totalStonesA = aPitGoal.returnStones();
+		totalStonesB = aPitGoal.returnStones();
 		if (totalStonesA > totalStonesB) {
 			System.out.println("Player A has Won!");
 		}
