@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.*;
 
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import javax.swing.*;
 
 /**
@@ -136,6 +139,28 @@ public class GameFrame extends JFrame{
 			}
 		});
 		
+		ChangeListener listener = new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				// TODO Auto-generated method stub
+				for (int i = 0; i < pits.length; i++) {
+					pits[i].clear();
+					pits[i].addStone(model.getStonesFromModelIndex(i));
+				}
+				playerPits[0].clear();
+				playerPits[0].addStone(model.getStonesForPlayerB());
+				playerPits[1].clear();
+				playerPits[1].addStone(model.getStonesForPlayerA());
+				updateViewTurns();
+				repaint();
+				revalidate();
+			}
+			
+		};
+		
+		model.addListeners(listener);
+		
 		bottom.add(undo);
 		bottom.add(name);
 		
@@ -151,18 +176,9 @@ public class GameFrame extends JFrame{
 	/**
 	 * Tai's update Views function. Actually updates Bronsin's model which updates the view.
 	 */
-	public void updateViews() {
-		for (int i = 0; i < pits.length; i++) {
-			pits[i].clear();
-			pits[i].addStone(model.getStonesFromModelIndex(i));
-		}
-		playerPits[0].clear();
-		playerPits[0].addStone(model.getStonesForPlayerB());
-		playerPits[1].clear();
-		playerPits[1].addStone(model.getStonesForPlayerA());
-		repaint();
-		revalidate();
-	}
+	
+	
+	
 	/**
 	 * Tai's update turns function. Updates Bronsin's name TextArea to display who's turn it is.
 	 */

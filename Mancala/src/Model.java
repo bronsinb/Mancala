@@ -3,6 +3,9 @@
  */
 import java.util.ArrayList;
 
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 /**
  * Model of Game
  * @author Tai Dao and Stephen Yang (Logic)
@@ -14,6 +17,7 @@ public class Model {
 	private boolean freeTurnA = false;
 	private boolean freeTurnB = false;
 	private ArrayList<ModelPit> pList;
+	private ArrayList<ChangeListener> listeners;
 	private int[] stateA;
 	private int[] stateB;
 	private int[] goalStatesA;
@@ -39,7 +43,7 @@ public class Model {
 	 */
 	Model(int startingStones, GameFrame gameFrame) {
 		refToBronsinsFrame = gameFrame;
-		
+		listeners = new ArrayList<>();
 		pList = new ArrayList<ModelPit> ();
 		stateA = new int[12];
 		stateB = new int[12];
@@ -448,8 +452,15 @@ public class Model {
 	 * Updates Bronsin's Model
 	 */
 	public void updateBronsinModel () {
-		refToBronsinsFrame.updateViews();
+		ChangeEvent event = new ChangeEvent(this);
+		for (ChangeListener listener : listeners)
+			listener.stateChanged(event); 
 	}
+	
+	public void addListeners(ChangeListener l) {
+		listeners.add(l);
+	}
+	
 	public int getStonesFromModelIndex (int index){
 		int stonesInIndex = pList.get(index).returnStones();
 		return stonesInIndex;
