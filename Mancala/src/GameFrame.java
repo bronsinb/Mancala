@@ -35,7 +35,7 @@ public class GameFrame extends JFrame{
 	public GameFrame(int stoneAmount, MancalaStyle style, String a, String b) {
 		A = a;
 		B = b;
-		model = new Model(stoneAmount, this);  //Tai's Model
+		model = new Model(stoneAmount, this, a, b);  //Tai's Model
 		name = new JTextArea(" "+ a + "'s Turn ");
 		name.setFont(new Font("SansSerif", Font.BOLD, 17));
 		name.setEditable(false);
@@ -165,9 +165,18 @@ public class GameFrame extends JFrame{
 				playerPits[0].addStone(model.getStonesForPlayerB());
 				playerPits[1].clear();
 				playerPits[1].addStone(model.getStonesForPlayerA());
-				updateViewTurns();
 				repaint();
 				revalidate();
+				if(model.endGameConditionMet()) {
+					String winner = model.whoIsWinner();
+					if(winner.equals(a) || winner.equals(b)) {
+						JOptionPane.showMessageDialog(null, winner + " is Winner!");
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Game ended with a " + winner);
+					}
+				}
+				updateViewTurns();
 			}
 		};
 		model.addListeners(listener);

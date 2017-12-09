@@ -28,7 +28,8 @@ public class Model {
 	private ModelPit aPitGoal;
 	private ModelPit bPitGoal;
 	private int currentPos;
-
+	private String a;
+	private String b;
 	
 	private GameFrame refToBronsinsFrame;
 	
@@ -41,7 +42,7 @@ public class Model {
 	 * 
 	 * @param startingStones
 	 */
-	Model(int startingStones, GameFrame gameFrame) {
+	Model(int startingStones, GameFrame gameFrame, String a, String b) {
 		refToBronsinsFrame = gameFrame;
 		listeners = new ArrayList<>();
 		pList = new ArrayList<ModelPit> ();
@@ -49,6 +50,8 @@ public class Model {
 		stateB = new int[12];
 		goalStatesA = new int[2];
 		goalStatesB = new int[2];
+		this.a = a;
+		this.b = b;
 		
 		for (int i = 0; i <= 11; i ++) {
 			pList.add(new ModelPit(startingStones)); //Each Pit will be initialized with 3 or 4 stones and
@@ -394,8 +397,9 @@ public class Model {
 	
 	/**
 	 * This function determines who won after the end game condition was met
+	 * @return String winner
 	 */
-	public void whoIsWinner() {
+	public String whoIsWinner() {
 		for (int i = 0; i <=5 ; i++) {
 			aPitGoal.addStone(pList.get(i).returnStones());
 		}
@@ -403,17 +407,18 @@ public class Model {
 			bPitGoal.addStone(pList.get(i).returnStones());
 		}
 		int totalStonesA = aPitGoal.returnStones();
-		int totalStonesB = aPitGoal.returnStones();
+		int totalStonesB = bPitGoal.returnStones();
 		if (totalStonesA > totalStonesB) {
-			System.out.println("Player A has Won!");
+			return a;
 		}
 		else if (totalStonesB > totalStonesA) {
-			System.out.println("Player B has Won!");
+			return b;
 		}
 		else {
-			System.out.println("DRAW!");
+			return "Draw!";
 		}
 	}
+
 	/**
 	 * This function returns the pit to capture given the current pit index
 	 * @param capturer
