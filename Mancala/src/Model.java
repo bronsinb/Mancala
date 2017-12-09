@@ -393,16 +393,14 @@ public class Model {
 	 * This function determines who won after the end game condition was met
 	 */
 	public void whoIsWinner() {
-		int totalStonesA = aPitGoal.returnStones();
-		int totalStonesB = bPitGoal.returnStones();
 		for (int i = 0; i <=5 ; i++) {
 			aPitGoal.addStone(pList.get(i).returnStones());
 		}
 		for (int i = 6; i <=11 ; i++) {
 			bPitGoal.addStone(pList.get(i).returnStones());
 		}
-		totalStonesA = aPitGoal.returnStones();
-		totalStonesB = aPitGoal.returnStones();
+		int totalStonesA = aPitGoal.returnStones();
+		int totalStonesB = aPitGoal.returnStones();
 		if (totalStonesA > totalStonesB) {
 			System.out.println("Player A has Won!");
 		}
