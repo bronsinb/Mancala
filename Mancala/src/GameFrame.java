@@ -138,9 +138,22 @@ public class GameFrame extends JFrame{
 				model.undo();
 			}
 		});
+
+		bottom.add(undo);
+		bottom.add(name);
+		
+		this.add(top, BorderLayout.PAGE_START);
+		this.add(west, BorderLayout.LINE_START);
+		this.add(grid, BorderLayout.CENTER);
+		this.add(east, BorderLayout.LINE_END);
+		this.add(bottom, BorderLayout.PAGE_END);
+		
+		this.setResizable(false);
 		
 		ChangeListener listener = new ChangeListener() {
-
+			/**
+			 * When state changed. Actually updates Bronsin's pits / playerPits which updates the view.
+			 */
 			@Override
 			public void stateChanged(ChangeEvent arg0) {
 				// TODO Auto-generated method stub
@@ -156,31 +169,12 @@ public class GameFrame extends JFrame{
 				repaint();
 				revalidate();
 			}
-			
 		};
-		
 		model.addListeners(listener);
-		
-		bottom.add(undo);
-		bottom.add(name);
-		
-		this.add(top, BorderLayout.PAGE_START);
-		this.add(west, BorderLayout.LINE_START);
-		this.add(grid, BorderLayout.CENTER);
-		this.add(east, BorderLayout.LINE_END);
-		this.add(bottom, BorderLayout.PAGE_END);
-		
-		this.setResizable(false);
 	}
 	
 	/**
-	 * Tai's update Views function. Actually updates Bronsin's model which updates the view.
-	 */
-	
-	
-	
-	/**
-	 * Tai's update turns function. Updates Bronsin's name TextArea to display who's turn it is.
+	 * Tai's update turns function. Updates Bronsin's name TextArea to display who's turn it is. Called by the
 	 */
 	public void updateViewTurns() {
 		if(model.playerAsTurn()) {

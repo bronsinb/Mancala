@@ -99,7 +99,7 @@ public class Model {
 				bPitGoal.setStones(goalStatesA[1]);
 				undoNumA++;
 				undoUsed = true;
-				updateBronsinModel();
+				updateAllViews();
 			}
 		}
 		else if(freeTurnB) {
@@ -114,7 +114,7 @@ public class Model {
 				bPitGoal.setStones(goalStatesB[1]);
 				undoNumB++;
 				undoUsed = true;
-				updateBronsinModel();
+				updateAllViews();
 			}
 		}
 		else {
@@ -132,7 +132,7 @@ public class Model {
 					bPitGoal.setStones(goalStatesA[1]);
 					undoNumA++;
 					undoUsed = true;
-					updateBronsinModel();
+					updateAllViews();
 				}
 			}
 			else {
@@ -149,7 +149,7 @@ public class Model {
 					bPitGoal.setStones(goalStatesB[1]);
 					undoNumB++;
 					undoUsed = true;
-					updateBronsinModel();	
+					updateAllViews();	
 				}
 			}
 		}
@@ -172,7 +172,7 @@ public class Model {
 			if (playerAsTurn() && pitPos <= 5) {
 				saveStateA(); // saves current state before moving
 				moveStonesPlayerA(pitPos);
-				updateBronsinModel();
+				updateAllViews();
 				updateViewTurns();
 				firstTurnCompleted = true;
 				undoUsed = false;
@@ -180,7 +180,7 @@ public class Model {
 			else if (!playerAsTurn() && pitPos > 5) {
 				saveStateB();
 				moveStonesPlayerB(pitPos);
-				updateBronsinModel();
+				updateAllViews();
 				updateViewTurns();
 				undoUsed = false;
 			}
@@ -449,25 +449,37 @@ public class Model {
 		pList.get(capturingPit).addStone(stonesInEnemyPit); //Steal stones
 	}
 	/**
-	 * Updates Bronsin's Model
+	 * Updates all views
 	 */
-	public void updateBronsinModel () {
+	public void updateAllViews () {
 		ChangeEvent event = new ChangeEvent(this);
 		for (ChangeListener listener : listeners)
 			listener.stateChanged(event); 
 	}
-	
 	public void addListeners(ChangeListener l) {
 		listeners.add(l);
 	}
 	
+	/**
+	 * Returns stones from a specific pit. 0-5 is A's side. 6-11 is B's side
+	 * @param index
+	 * @return stones
+	 */
 	public int getStonesFromModelIndex (int index){
 		int stonesInIndex = pList.get(index).returnStones();
 		return stonesInIndex;
 	}
+	/**
+	 * Returns stones from player A's goal
+	 * @return
+	 */
 	public int getStonesForPlayerA() {
 		return aPitGoal.returnStones();
 	}
+	/**
+	 * Returns stones from player B's goal
+	 * @return
+	 */
 	public int getStonesForPlayerB() {
 		return bPitGoal.returnStones();
 	}
