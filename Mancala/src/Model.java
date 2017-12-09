@@ -78,7 +78,7 @@ public class Model {
 	}
 	
 	/**
-	 * If the undo button is pressed this is called.
+	 * If the undo button is pressed this should be called.
 	 */
 	public void undo() {
 		if (!firstTurnCompleted) {
@@ -156,8 +156,7 @@ public class Model {
 	}
 	
 	/**
-	 * pitPos is retrieved from a pit listener. when a pit is pressed it calls this function with it's position as the parameter
-	 * 
+	 * When a pit is pressed it should call this function with it's position as the parameter
 	 * This function checks if the selected pit is valid for the current player's turn.
 	 * 
 	 * @param pitPos
@@ -416,7 +415,7 @@ public class Model {
 		}
 	}
 	/**
-	 * This function returns the pit to capture given the current pit
+	 * This function returns the pit to capture given the current pit index
 	 * @param capturer
 	 * @return indexToCapture
 	 */
@@ -456,6 +455,10 @@ public class Model {
 		for (ChangeListener listener : listeners)
 			listener.stateChanged(event); 
 	}
+	/**
+	 * Views can call this function to add listeners to the model.
+	 * @param l
+	 */
 	public void addListeners(ChangeListener l) {
 		listeners.add(l);
 	}
