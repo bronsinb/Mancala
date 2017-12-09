@@ -19,6 +19,8 @@ public class GameFrame extends JFrame{
 	private PlayerPit[] playerPits;
 	private JPanel grid;
 	private JTextArea name;
+	private String A;
+	private String B;
 	
 	/**
 	 * Constructs Frame that paints Mancala gameboard
@@ -28,6 +30,8 @@ public class GameFrame extends JFrame{
 	 * @param b Player B's name
 	 */
 	public GameFrame(int stoneAmount, MancalaStyle style, String a, String b) {
+		A = a;
+		B = b;
 		model = new Model(stoneAmount, this);  //Tai's Model
 		name = new JTextArea(" "+ a + "'s Turn ");
 		name.setFont(new Font("SansSerif", Font.BOLD, 17));
@@ -164,10 +168,10 @@ public class GameFrame extends JFrame{
 	 */
 	public void updateViewTurns() {
 		if(model.playerAsTurn()) {
-			name.setText(" " + "a's Turn ");
+			name.setText(" " + A + "'s Turn ");
 		}
 		else if(!model.playerAsTurn()){
-			name.setText(" " + "b's Turn ");
+			name.setText(" " + B + "'s Turn ");
 		}
 	}
 }
