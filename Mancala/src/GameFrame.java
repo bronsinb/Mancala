@@ -168,6 +168,10 @@ public class GameFrame extends JFrame{
 				repaint();
 				revalidate();
 				if(model.endGameConditionMet()) {
+					undo.setEnabled(false);
+					for (int i = 0; i < pits.length; i++) {
+						pits[i].setEnabled(false);
+					}
 					String winner = model.whoIsWinner();
 					if(winner.equals(a) || winner.equals(b)) {
 						JOptionPane.showMessageDialog(null, winner + " is Winner!");
