@@ -173,7 +173,7 @@ public class GameFrame extends JFrame{
 						JOptionPane.showMessageDialog(null, winner + " is Winner!");
 					}
 					else {
-						JOptionPane.showMessageDialog(null, "Game ended with a " + winner);
+						JOptionPane.showMessageDialog(null, "Game ended with a draw!");
 					}
 				}
 				updateViewTurns();
