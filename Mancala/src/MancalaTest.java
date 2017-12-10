@@ -91,19 +91,6 @@ public class MancalaTest {
 	    	
 	    });
 	    
-	    
-	
-		/**
-		 * Tai Tester 3 is initial stones
-		 */
-		//GameFrame comp = new GameFrame(3, new ColoredStyle(), playerNameInput.getText(), playerNameTwoInput.getText());
-		//start.dispose();
-		//comp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		//comp.setVisible(true);
-		/**
-		 * end Tai Tester
-		 */
-	    
 	    JPanel styleStart = new JPanel();
 	    styleStart.setLayout(new GridLayout(0, 2));
 	    styleStart.add(colorButton);
